@@ -1,0 +1,25 @@
+{
+  "name": "lista_de_ocorrencia",
+  "version": "1.0.0",
+  "description": "Lista de Ocorrencia de Condominio",
+  "main": "src/backend.js",
+  "scripts": {
+    "dev": "nodemon ./src/backend.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xxxRafaelxxx/TeamCoders.git"
+  },
+  "author": "Rafael Santos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xxxRafaelxxx/TeamCoders/issues"
+  },
+  "homepage": "https://github.com/xxxRafaelxxx/TeamCoders#readme",
+  "dependencies": {
+    "express": "^4.19.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
