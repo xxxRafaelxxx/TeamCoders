@@ -19,7 +19,7 @@ const cadastrarUsuarios = async (req, res) => {
 
         switch (status.toLowerCase()) {
             case 'porteiro':
-                await knex('porteiro').insert({
+                await knex('porteiros').insert({
                     condominio_id,
                     nome,
                     email,
@@ -43,7 +43,7 @@ const cadastrarUsuarios = async (req, res) => {
                 break;
             case 'administrador':
                 dadosUsuario = { condominio_id, nome, email, telefone, senha_hash, status };
-                await knex('administrador').insert(dadosUsuario);
+                await knex('administradores').insert(dadosUsuario);
                 break;
             default:
                 // Se for um tipo de usuário desconhecido, retornar um erro
@@ -60,21 +60,31 @@ const cadastrarUsuarios = async (req, res) => {
 
 const obterPerfil = (req, res) => {
 
-}
+};
+
+const editarPerfil = (req, res) => {
+
+};
+
+const deletarUsuario = (req, res) => {
+
+};
+
 
 const listarPorteiros = (req, res) => {
 
-}
+};
 
 const listarSindicos = (req, res) => {
 
-}
+};
 
 module.exports = {
     listarUsuarios,
     cadastrarUsuarios,
     obterPerfil,
+    editarPerfil,
+    deletarUsuario,
     listarPorteiros,
     listarSindicos
-
 };
