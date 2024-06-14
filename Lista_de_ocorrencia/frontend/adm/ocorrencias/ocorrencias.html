@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" integrity="sha512-OQDNdI5rpnZ0BRhhJc+btbbtnxaj+LdQFeh0V9/igiEPDiWE2fG+ZsXl0JEH+bjXKPJ3zcXqNyP4/F/NegVdZg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/records.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <script src="main.js" defer></script>
+    <title>CRUD</title>
+</head>
+
+<body>
+    <header>
+        <img src="../img/CodoLog.png" alt="" class="header-logo">
+        <h1 class="header-title">- ADM
+        </h1>
+    </header>
+    <div class="container"> <!--Todo o conteúdo abaixo do header (Siderbar/Main)-->
+    <nav id="sidebar"> <!--Contéudo da sidebar-->
+        <div id="sidebar_content">
+        <div id="user">
+            <img src="user-fill.svg" id="user-avatar" alt="Avatar">
+            <p id="user-infos">
+                <span class="item-description">
+                    Nome Fulano
+                </span>
+                <span class="item-description">
+                    Administrador
+                </span>
+            </p>
+        </div>
+        
+        <ul id="side_items"> <!--Condomínio / Usuário / Ocorrências-->
+            <li class="side-item">
+                <a href="../condominio/condominio.html">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="item-description">
+                        Condomínio
+                    </span>
+                </a>
+            </li>
+
+            <li class="side-item">
+                <a href="../index.html">
+                    <i class="fa-solid fa-user-group"></i>
+                    <span class="item-description">
+                        Usuários
+                    </span>
+                </a>
+            </li>
+
+            <li class="side-item active">
+            <a href="ocorrencias.html">
+                    <i class="fa-solid fa-book"></i>
+                    <span class="item-description">
+                        Ocorrências
+                    </span>
+                </a>
+            </li>
+        </ul>
+
+        <button id="open_btn">
+            <a href="../perfil/perfil.html">
+            <i id="open_btn_icon" class="fa-solid fa-chevron-right"></i>
+        </a>
+        </button>
+    </div>
+    
+        <div id="logout">
+            <button id="logout_btn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span class="item-description">
+                    Sair
+                </span>
+            </button>
+        </div>
+    </nav>
+    <main>
+        <h1>Todas as Ocorrências</h1>
+        <table class="records"> <!--Tabela de gravações do cadastro do cliente-->
+            <thead>
+                <tr>
+                    <th>Assunto</th>
+                    <th>Tipo de Ocorrência</th>
+                    <th>Data</th>
+                    <th>Usuário</th>
+                    <th>Ação</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Lixo</td>
+                    <td>Limpeza</td>
+                    <td>10/10/2024</td>
+                    <td>Maria</td>
+                    <td>
+                        <button type="button" class="button blue">ver</button>
+                        <button type="button" class="button green" onclick="openModal(this)">colocar status</button>
+                    </td>
+                    <td>
+                        <div class="status-inicial">
+                            <div class="status Esperando"></div>
+                                <p>Esperando Status</p>
+                            </div>
+                            <div class="status Visto">
+                                <p>Visto</p>
+                            </div>
+                            <div class="status Resolvido">
+                                <p>Resolvido</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Lixo</td>
+                    <td>Limpeza</td>
+                    <td>10/10/2024</td>
+                    <td>Maria</td>
+                    <td>
+                        <button type="button" class="button blue">ver</button>
+                        <button type="button" class="button green" onclick="openModal(this)">colocar status</button>
+                    </td>
+                    <td>
+                        <div class="status-inicial">
+                            <div class="status Esperando"></div>
+                                <p>Esperando Status</p>
+                            </div>
+                            <div class="status Visto">
+                                <p>Visto</p>
+                            </div>
+                            <div class="status Resolvido">
+                                <p>Resolvido</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Lixo</td>
+                    <td>Limpeza</td>
+                    <td>10/10/2024</td>
+                    <td>Maria</td>
+                    <td>
+                        <button type="button" class="button blue">ver</button>
+                        <button type="button" class="button green" onclick="openModal(this)">colocar status</button>
+                    </td>
+                    <td>
+                        <div class="status-inicial">
+                            <div class="status Esperando"></div>
+                                <p>Esperando Status</p>
+                            </div>
+                            <div class="status Visto">
+                                <p>Visto</p>
+                            </div>
+                            <div class="status Resolvido">
+                                <p>Resolvido</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+
+<div id="statusModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Atualizar Status da Ocorrência</h2>
+        <button type="button" onclick="updateStatus('visto')">Marcar como Visto</button>
+        <button type="button" onclick="updateStatus('resolvido')">Marcar como Resolvido</button>
+    </div>
+</div>
+
+</body>
+</div>
+</body>
+</html>

@@ -18,10 +18,12 @@
     <script src="main.js" defer></script>
     <title>CRUD</title>
 </head>
+
 <body>
+
     <header>
         <img src="../img/CodoLog.png" alt="" class="header-logo">
-        <h1 class="header-title"> - ADM
+        <h1 class="header-title"> - PORTEIRO
         </h1>
     </header>
     <div class="container"> <!--Todo o conteúdo abaixo do header (Siderbar/Main)-->
@@ -34,7 +36,7 @@
                     Nome Fulano
                 </span>
                 <span class="item-description">
-                    Administrador
+                    Porteiro
                 </span>
             </p>
         </div>
@@ -53,13 +55,13 @@
                 <a href="../index.html">
                     <i class="fa-solid fa-user-group"></i>
                     <span class="item-description">
-                        Usuários
+                        Registrar Ocorrência
                     </span>
                 </a>
             </li>
 
-            <li class="side-item">
-            <a href="../ocorrencias/ocorrencias.html">
+            <li class="side-item active">
+            <a href="ocorrencias.html">
                     <i class="fa-solid fa-book"></i>
                     <span class="item-description">
                         Ocorrências
@@ -69,10 +71,12 @@
         </ul>
 
         <button id="open_btn">
+            <a href="../perfil/perfil.html">
             <i id="open_btn_icon" class="fa-solid fa-chevron-right"></i>
+        </a>
         </button>
     </div>
-
+    
         <div id="logout">
             <button id="logout_btn">
                 <i class="fa-solid fa-right-from-bracket"></i>
@@ -83,29 +87,53 @@
         </div>
     </nav>
     <main>
-        <div class="informacoes">
-                  <h2 class="titulo">Informações do Usuário</h2>
-                  <ul>
-                    <li>
-                      <label for="nome">Nome Completo:</label>
-                      <input type="text" id="nome" name="nome" disabled>
-                    </li>
-                    <li>
-                      <label for="telefone">Número de telefone:</label>
-                      <input type="tel" id="telefone" name="telefone" disabled>
-                    </li>
-                    <li>
-                      <label for="email">E-mail:</label>
-                      <input type="email" id="email" name="email" disabled>
-                    </li>
-                    <li>
-                      <label for="casa-bloco">Número casa/bloco:</label>
-                      <input type="text" id="casa-bloco" name="casa-bloco" disabled>
-                    </li>
-                  </ul>
-            </div>
-    <button class="button green" id="editar-btn">Editar Informações</button>
+        <h1>Suas Ocorrências</h1>
+        <table class="records"> <!--Tabela de gravações do cadastro do cliente-->
+            <thead>
+                <tr>
+                    <th>Assunto</th>
+                    <th>Tipo de Ocorrência</th>
+                    <th>Data</th>
+                    <th>Usuário</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Lixo</td>
+                    <td>Limpeza</td>
+                    <td>10/10/2024</td>
+                    <td>Maria</td>
+                    <td>
+                        <button type="button" class="button blue">ver</button>
+                        <button type="button" class="button red">ver status</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Lixo</td>
+                    <td>Limpeza</td>
+                    <td>10/10/2024</td>
+                    <td>Maria</td>
+                    <td>
+                        <button type="button" class="button blue">ver</button>
+                        <button type="button" class="button red">ver status</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Lixo</td>
+                    <td>Limpeza</td>
+                    <td>10/10/2024</td>
+                    <td>Maria</td>
+                    <td>
+                        <button type="button" class="button blue">ver</button>
+                        <button type="button" class="button red">ver status</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </main>
+</div>
+</body>
 </div>
 </body>
 </html>

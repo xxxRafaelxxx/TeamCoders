@@ -49,14 +49,17 @@ header{
     object-fit: cover;
 }
 
+.header-title{
+    color: black;
+    font-size: 2rem;
+}
 
 main{
     flex-grow: 1;
     display: flex;
-    flex-direction: column;
     align-items: flex-start;
     width: 90%;
-    margin: 5vh auto;
+    margin: 10px auto;
     padding: 50px;
     box-shadow: 2px 2px 10px var(--shadow-color);
     gap: 20px;
@@ -187,27 +190,71 @@ footer{
     text-decoration: none;
 }
 
-/*/ Informações /*/
-#info {
+/*NOVA OCORRÊNCIA*/
+
+main .container-ocorrencia {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 40px;
+    align-items: center;
+    justify-content: center;
 }
 
-#info strong {
-    display: block; /* Faz com que os títulos sejam exibidos como blocos */
-    margin-bottom: 5px; /* Adiciona um espaço entre o título e o span */
+.container-ocorrencia h1 {
+    font-size: 24px;
+    text-align: center;
 }
 
-#info-left, #info-right {
-    flex-basis: 48%; /* Define a largura de cada div para 48% */
-    padding: 10px; /* Adiciona algum espaçamento interno */
-    box-sizing: border-box; /* Garante que o padding seja incluído no tamanho total */
+.container-ocorrencia .form-group {
+    margin-bottom: 20px;
 }
 
+.container-ocorrencia label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.container-ocorrencia input[type="text"],
+.container-ocorrencia select,
+.container-ocorrencia textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.container-ocorrencia input[type="date"],
+.container-ocorrencia input[type="file"] {
+    width: calc(100% - 2px);
+    /* Adjust for border width */
+}
+
+.container-ocorrencia .form-group button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.container-ocorrencia .form-group button:hover {
+    background-color: #0056b3;
+}
+
+main .imagem {
+    margin-left: 100px;
+}
+main .imagem img {
+    width: 500px;
+}
 @media (max-width:480px){
     header{
-        position:fixed;
         width:100%;
     }
     .header-title{
@@ -217,7 +264,14 @@ footer{
     main{
         padding: 0;
         margin: 20px 0 0 0;
-        width:100%;
+        width: auto;
         box-shadow: none;
+    }
+
+    .container-ocorrencia {
+        padding-right: 15px;
+    }
+    .imagem {
+        display: none;
     }
 }

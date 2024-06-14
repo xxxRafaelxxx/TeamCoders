@@ -187,23 +187,32 @@ footer{
     text-decoration: none;
 }
 
-/*/ Informações /*/
-#info {
+
+/* Estilos para os status */
+.status-inicial {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
 }
 
-#info strong {
-    display: block; /* Faz com que os títulos sejam exibidos como blocos */
-    margin-bottom: 5px; /* Adiciona um espaço entre o título e o span */
+.status {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.4; /* Opacidade inicial para Visto e Resolvido */
 }
 
-#info-left, #info-right {
-    flex-basis: 48%; /* Define a largura de cada div para 48% */
-    padding: 10px; /* Adiciona algum espaçamento interno */
-    box-sizing: border-box; /* Garante que o padding seja incluído no tamanho total */
+.status.Esperando {
+    opacity: 1; /* Opacidade alta para Esperando */
 }
+
+.status.Visto {
+    background-color: lightgreen; /* Fundo verde para Visto */
+}
+
+.status.Resolvido {
+    background-color: lightgreen; /* Fundo verde para Resolvido */
+}
+
 
 @media (max-width:480px){
     header{

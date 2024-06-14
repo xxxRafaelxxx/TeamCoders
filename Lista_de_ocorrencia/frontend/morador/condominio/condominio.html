@@ -21,7 +21,7 @@
 <body>
     <header>
         <img src="../img/CodoLog.png" alt="" class="header-logo">
-        <h1 class="header-title"> - ADM
+        <h1 class="header-title"> - MORADOR
         </h1>
     </header>
     <div class="container"> <!--Todo o conteúdo abaixo do header (Siderbar/Main)-->
@@ -34,14 +34,14 @@
                     Nome Fulano
                 </span>
                 <span class="item-description">
-                    Administrador
+                    Morador
                 </span>
             </p>
         </div>
         
         <ul id="side_items"> <!--Condomínio / Usuário / Ocorrências-->
-            <li class="side-item">
-                <a href="../condominio/condominio.html">
+            <li class="side-item active">
+                <a href="condominio.html">
                     <i class="fa-solid fa-house"></i>
                     <span class="item-description">
                         Condomínio
@@ -53,7 +53,7 @@
                 <a href="../index.html">
                     <i class="fa-solid fa-user-group"></i>
                     <span class="item-description">
-                        Usuários
+                        Registrar Ocorrência
                     </span>
                 </a>
             </li>
@@ -69,10 +69,12 @@
         </ul>
 
         <button id="open_btn">
+            <a href="../perfil/perfil.html">
             <i id="open_btn_icon" class="fa-solid fa-chevron-right"></i>
+        </a>
         </button>
     </div>
-
+    
         <div id="logout">
             <button id="logout_btn">
                 <i class="fa-solid fa-right-from-bracket"></i>
@@ -83,29 +85,66 @@
         </div>
     </nav>
     <main>
-        <div class="informacoes">
-                  <h2 class="titulo">Informações do Usuário</h2>
-                  <ul>
-                    <li>
-                      <label for="nome">Nome Completo:</label>
-                      <input type="text" id="nome" name="nome" disabled>
-                    </li>
-                    <li>
-                      <label for="telefone">Número de telefone:</label>
-                      <input type="tel" id="telefone" name="telefone" disabled>
-                    </li>
-                    <li>
-                      <label for="email">E-mail:</label>
-                      <input type="email" id="email" name="email" disabled>
-                    </li>
-                    <li>
-                      <label for="casa-bloco">Número casa/bloco:</label>
-                      <input type="text" id="casa-bloco" name="casa-bloco" disabled>
-                    </li>
-                  </ul>
+        <h1>Informações do Condomínio</h1>
+
+        <div id="informacoes">
+            <h2>Cond. Lagoa Verde</h2>
+            <p><strong>Total de moradores: </strong><span id="totalMoradores">100</span></p>
+            <p><strong>Localização: </strong><span id="localizacao">Rua das Flores, 123</span></p>
+            <p><strong>Imagens:</strong> <span id="imagens">Clique para ver as imagens</span></p>
+            <p><strong>Contato síndicos: </strong><span id="contatoSindicos">(XX) XXXX-XXXX</span></p>
+            <p><strong>E-mail da administração:</strong> <span id="emailAdministracao">admin@condominiolagoaverde.com</span></p>
+            <p><strong>Número da administração: </strong><span id="numeroAdministracao">(XX) XXXX-XXXX</span></p>
+            <p><strong>Número da portaria:</strong> <span id="numeroPortaria">(XX) XXXX-XXXX</span></p>
+        </div>
+        <button class="button green" id="editarInformacoes" type="submit">Editar Informações</button>
+
+        <!-- Modal -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Editar Informações</h2>
+
+                <div class="form">
+                <form id="formEditar">
+                    <div class="moradores">
+                        <label for="totalMoradoresInput"><strong>Total de moradores:</strong></label>
+                        <input type="text" id="totalMoradoresInput">
+                    </div>
+
+                    <div class="localizacao">
+                        <label for="localizacaoInput"><strong>Localização:</strong></label>
+                        <input type="text" id="localizacaoInput">
+                    </div>
+
+                    <div class="sindico">
+                        <label for="contatoSindicosInput"><strong>Contato síndicos:</strong></label>
+                        <input type="text" id="contatoSindicosInput">
+                    </div>
+                    <div class="email">
+                        <label for="emailAdministracaoInput"><strong>E-mail da administração:</strong></label>
+                        <input type="email" id="emailAdministracaoInput">
+                    </div>
+                    <div class="numero-adm">
+                        <label for="numeroAdministracaoInput"><strong>Número da administração:</strong></label>
+                        <input type="tel" id="numeroAdministracaoInput">
+                    </div>
+                    
+                    <div class="numero-porta">
+                        <label for="numeroPortariaInput"><strong>Número da portaria:</strong></label>
+                        <input type="tel" id="numeroPortariaInput">
+                    </div>
+
+                    <div class="botao-editar">
+                    <button class="button green" id="editar-btn" type="submit">Salvar</button>
+                    </div>
+                </form>
+                </div>
             </div>
-    <button class="button green" id="editar-btn">Editar Informações</button>
+        </div>
     </main>
+</div>
+</body>
 </div>
 </body>
 </html>

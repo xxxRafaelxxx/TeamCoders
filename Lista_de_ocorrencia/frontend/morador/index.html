@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -20,12 +19,12 @@
 </head>
 <body>
     <header>
-        <img src="../img/CodoLog.png" alt="" class="header-logo">
-        <h1 class="header-title"> - ADM
+        <img src="img/CodoLog.png" alt="" class="header-logo">
+        <h1 class="header-title"> - MORADOR
         </h1>
     </header>
-    <div class="container"> <!--Todo o conteúdo abaixo do header (Siderbar/Main)-->
-    <nav id="sidebar"> <!--Contéudo da sidebar-->
+    <div class="container">
+    <nav id="sidebar">
         <div id="sidebar_content">
         <div id="user">
             <img src="user-fill.svg" id="user-avatar" alt="Avatar">
@@ -34,14 +33,14 @@
                     Nome Fulano
                 </span>
                 <span class="item-description">
-                    Administrador
+                    Morador
                 </span>
             </p>
         </div>
         
-        <ul id="side_items"> <!--Condomínio / Usuário / Ocorrências-->
+        <ul id="side_items">
             <li class="side-item">
-                <a href="../condominio/condominio.html">
+                <a href="condominio/condominio.html">
                     <i class="fa-solid fa-house"></i>
                     <span class="item-description">
                         Condomínio
@@ -49,17 +48,17 @@
                 </a>
             </li>
 
-            <li class="side-item">
-                <a href="../index.html">
+            <li class="side-item active">
+                <a href="index.html">
                     <i class="fa-solid fa-user-group"></i>
                     <span class="item-description">
-                        Usuários
+                        Registrar Ocorrência
                     </span>
                 </a>
             </li>
 
             <li class="side-item">
-            <a href="../ocorrencias/ocorrencias.html">
+            <a href="../morador/ocorrencias/ocorrencias.html">
                     <i class="fa-solid fa-book"></i>
                     <span class="item-description">
                         Ocorrências
@@ -69,8 +68,11 @@
         </ul>
 
         <button id="open_btn">
+            <a href="perfil/perfil.html">
             <i id="open_btn_icon" class="fa-solid fa-chevron-right"></i>
+        </a>
         </button>
+        
     </div>
 
         <div id="logout">
@@ -82,29 +84,47 @@
             </button>
         </div>
     </nav>
+
     <main>
-        <div class="informacoes">
-                  <h2 class="titulo">Informações do Usuário</h2>
-                  <ul>
-                    <li>
-                      <label for="nome">Nome Completo:</label>
-                      <input type="text" id="nome" name="nome" disabled>
-                    </li>
-                    <li>
-                      <label for="telefone">Número de telefone:</label>
-                      <input type="tel" id="telefone" name="telefone" disabled>
-                    </li>
-                    <li>
-                      <label for="email">E-mail:</label>
-                      <input type="email" id="email" name="email" disabled>
-                    </li>
-                    <li>
-                      <label for="casa-bloco">Número casa/bloco:</label>
-                      <input type="text" id="casa-bloco" name="casa-bloco" disabled>
-                    </li>
-                  </ul>
-            </div>
-    <button class="button green" id="editar-btn">Editar Informações</button>
+        <div class="container-ocorrencia">
+            <h1>Nova ocorrência</h1>
+            <form action="#" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="assunto">Assunto:</label>
+                    <input type="text" id="assunto" name="assunto" required>
+                </div>
+                <div class="form-group">
+                    <label for="tipo">Tipo de ocorrência:</label>
+                    <select id="tipo" name="tipo" required>
+                        <option value="">Selecione...</option>
+                        <option value="Manutenção">Manutenção</option>
+                        <option value="Segurança">Segurança</option>
+                        <option value="Vizinhança">Vizinhança</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="detalhes">Detalhes:</label>
+                    <textarea id="detalhes" name="detalhes" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="data">Data:</label>
+                    <input type="date" id="data" name="data" required>
+                </div>
+                <div class="form-group">
+                    <label for="anexos">Anexos:</label>
+                    <input type="file" id="anexos" name="anexos" multiple>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Enviar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="imagem">
+            <img src="casa.svg" alt="">
+        </div>
+        
     </main>
 </div>
 </body>

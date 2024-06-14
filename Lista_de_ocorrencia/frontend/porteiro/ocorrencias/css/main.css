@@ -50,6 +50,11 @@ header{
 }
 
 
+.header-title{
+    color: black;
+    font-size: 2rem;
+}
+
 main{
     flex-grow: 1;
     display: flex;
@@ -187,27 +192,9 @@ footer{
     text-decoration: none;
 }
 
-/*/ Informações /*/
-#info {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-#info strong {
-    display: block; /* Faz com que os títulos sejam exibidos como blocos */
-    margin-bottom: 5px; /* Adiciona um espaço entre o título e o span */
-}
-
-#info-left, #info-right {
-    flex-basis: 48%; /* Define a largura de cada div para 48% */
-    padding: 10px; /* Adiciona algum espaçamento interno */
-    box-sizing: border-box; /* Garante que o padding seja incluído no tamanho total */
-}
 
 @media (max-width:480px){
     header{
-        position:fixed;
         width:100%;
     }
     .header-title{
@@ -217,7 +204,14 @@ footer{
     main{
         padding: 0;
         margin: 20px 0 0 0;
-        width:100%;
+        width: auto;
         box-shadow: none;
+    }
+
+    .container-ocorrencia {
+        padding-right: 15px;
+    }
+    .imagem {
+        display: none;
     }
 }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro do Condomínio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card-left">
+            <img src="../../CodoLog/img/CodoLog.png" alt="">
+            <h1>Faça já o cadastro do seu Condomínio!</h1>
+        </div>
+    <div class="card-right">
+    <div class="card-cadastro">
+    <form>
+        <div class="form-group">
+            <label for="nome">Nome do Condomínio</label>
+            <input type="text" id="nome" name="nome" required>
+        </div>
+        <div class="form-group">
+            <label for="cnpj">CNPJ</label>
+            <input type="text" id="cnpj" name="cnpj" required>
+        </div>
+        <div class="form-group">
+            <label for="endereco">Endereço</label>
+            <input type="text" id="endereco" name="endereco" required>
+        </div>
+        <div class="form-group">
+            <label for="telefone-portaria">Telefone da Portaria</label>
+            <input type="tel" id="telefone-portaria" name="telefone-portaria" required>
+        </div>
+        <div class="form-group">
+            <label for="telefone-administracao">Telefone da Administração</label>
+            <input type="tel" id="telefone-administracao" name="telefone-administracao" required>
+        </div>
+        <div class="form-group">
+            <label for="email-administracao">Email da Administração</label>
+            <input type="email" id="email-administracao" name="email-administracao" required>
+        </div>
+        <div class="form-group">
+            <label for="empresa-administradora">Nome da Empresa Administradora <span class="optional">(opcional)</span></label>
+            <input type="text" id="empresa-administradora" name="empresa-administradora">
+        </div>
+
+        <div class="botao">
+        <button type="submit">Cadastrar</button>
+        </div>
+    </form>
+     <p>Cadastro realizado? <a href="../../CodoLog/index.html">Faça o login!</a></p>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

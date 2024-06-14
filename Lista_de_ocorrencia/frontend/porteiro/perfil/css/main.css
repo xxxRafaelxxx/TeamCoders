@@ -49,6 +49,10 @@ header{
     object-fit: cover;
 }
 
+.header-title{
+    color: black;
+    font-size: 2rem;
+}
 
 main{
     flex-grow: 1;
@@ -187,23 +191,50 @@ footer{
     text-decoration: none;
 }
 
-/*/ Informações /*/
-#info {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-#info strong {
-    display: block; /* Faz com que os títulos sejam exibidos como blocos */
-    margin-bottom: 5px; /* Adiciona um espaço entre o título e o span */
-}
-
-#info-left, #info-right {
-    flex-basis: 48%; /* Define a largura de cada div para 48% */
-    padding: 10px; /* Adiciona algum espaçamento interno */
-    box-sizing: border-box; /* Garante que o padding seja incluído no tamanho total */
-}
+  /* Informações do Usuário*/
+  
+  .informacoes {
+    padding: 20px;
+    position: relative;
+    width: 80%;
+    height: 80%;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .informacoes h2 {
+    margin-top: 0;
+  }
+  
+  .informacoes ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .informacoes li {
+    margin-bottom: 10px;
+  }
+  
+  .informacoes label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .informacoes input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .informacoes input[disabled] {
+    background-color: #ddd;
+  }
+  
+  .informacoes .titulo {
+    text-align: center;
+  }
 
 @media (max-width:480px){
     header{

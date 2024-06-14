@@ -35,15 +35,20 @@ body, html {
 header{
     background-color: var(--primary-color);
     height: 70px;
+    padding-left: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: left;
     text-align: left;
     line-height: 70px;
     box-shadow: 0 1px 2px var(--shadow-color);
 }
 
-.header-title{
-    color: black;
-    font-size: 2rem;
+.header-logo {
+    width: 120px;
+    object-fit: cover;
 }
+
 
 main{
     flex-grow: 1;
@@ -65,8 +70,6 @@ footer{
     font-style: italic;
     padding: 20px;
 }
-
-/*SIDEBAR*/
 
 #user-avatar {
     width: 50px;
@@ -179,6 +182,11 @@ footer{
     cursor: pointer;
 }
 
+#open_btn a{
+    color: inherit;
+    text-decoration: none;
+}
+
   /* Informações do Usuário*/
   
   .informacoes {
@@ -191,36 +199,36 @@ footer{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   }
   
-  h2 {
+  .informacoes h2 {
     margin-top: 0;
   }
   
-  ul {
+  .informacoes ul {
     list-style: none;
     padding: 0;
   }
   
-  li {
+  .informacoes li {
     margin-bottom: 10px;
   }
   
-  label {
+  .informacoes label {
     display: block;
     margin-bottom: 5px;
   }
   
-  input {
+  .informacoes input {
     width: 100%;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 3px;
   }
   
-  input[disabled] {
+  .informacoes input[disabled] {
     background-color: #ddd;
   }
   
-  .titulo {
+  .informacoes .titulo {
     text-align: center;
   }
 
