@@ -16,17 +16,35 @@ const listarOcorrencias = async (req, res) => {
 }
 
 const registrarOcorrencia = async (req, res) => {
-    // sind ou mor
+    // sind, mor ou por
     try {
-        const { morador_id, assunto, tipo_ocorrencia, nota } = req.body;
+        const { morador_id, sindico_id, porteiro_id, assunto, tipo_ocorrencia, nota, data_ocorrido, foto } = req.body;
+
+        // Verificar se pelo menos um dos IDs de morador, sindico ou porteiro foi fornecido
+        if (!morador_id && !sindico_id && !porteiro_id) {
+            return res.status(400).json({ erro: 'É necessário especificar quem registrou a ocorrência (morador_id, sindico_id ou porteiro_id).' });
+        }
+
+        // Garantir que apenas um dos IDs (morador_id, sindico_id ou porteiro_id) esteja preenchido
+        if ((morador_id && sindico_id) || (morador_id && porteiro_id) || (sindico_id && porteiro_id)) {
+            return res.status(400).json({ erro: 'A ocorrência só pode ser registrada por um morador, um síndico ou um porteiro, não mais de um ao mesmo tempo.' });
+        }
+
+        // Agora podemos inserir a ocorrência
         await knex('ocorrencias').insert({
             morador_id,
+            sindico_id,
+            porteiro_id,
             assunto,
             tipo_ocorrencia,
-            nota
+            nota,
+            data_ocorrido,
+            foto
         });
+
         return res.status(201).json({ mensagem: 'Ocorrência registrada com sucesso.' });
     } catch (error) {
+        console.error(error);
         return res.status(500).json({ erro: 'Erro ao registrar a ocorrência.' });
     }
 }

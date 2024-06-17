@@ -17,7 +17,7 @@ const cadastrarUsuarios = async (req, res) => {
         let dadosUsuario;
         const { casa } = req.body;
 
-        switch (status.toLowerCase()) {
+        switch (status.toLowerCase().trim()) {
             case 'porteiro':
                 await knex('porteiros').insert({
                     condominio_id,
@@ -46,7 +46,6 @@ const cadastrarUsuarios = async (req, res) => {
                 await knex('administradores').insert(dadosUsuario);
                 break;
             default:
-                // Se for um tipo de usuário desconhecido, retornar um erro
                 return res.status(400).json({ erro: 'Tipo de usuário inválido.' });
         }
 
@@ -58,26 +57,34 @@ const cadastrarUsuarios = async (req, res) => {
 };
 
 
-const obterPerfil = (req, res) => {
+const obterPerfil = async (req, res) => {
 
 };
 
-const editarPerfil = (req, res) => {
+const editarPerfil = async (req, res) => {
 
 };
 
-const deletarUsuario = (req, res) => {
+const deletarUsuario = async (req, res) => {
 
 };
 
 
-const listarPorteiros = (req, res) => {
+const listarPorteiros = async (req, res) => {
 
 };
 
-const listarSindicos = (req, res) => {
-
+const listarSindicos = async (req, res) => {
+    const sindicos = await knex('sindicos');
+    return res.json(sindicos);
 };
+
+const listarMoradores = async (req, res) => {
+    const moradores = await knex('moradores');
+    return res.json(moradores);
+};
+
+
 
 module.exports = {
     listarUsuarios,
@@ -86,5 +93,6 @@ module.exports = {
     editarPerfil,
     deletarUsuario,
     listarPorteiros,
-    listarSindicos
+    listarSindicos,
+    listarMoradores
 };

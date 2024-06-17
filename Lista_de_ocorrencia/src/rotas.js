@@ -3,7 +3,7 @@ const { knex } = require('./conexao');
 const { cadastrarCondominio, listarCondominio, editarCondominio, obterCondominio, deletarCondominio } = require('./controladores/condominio');
 const { registrarOcorrencia, listarOcorrencias, obterOcorrencia, editarOcorrencia, deletarOcorrencia } = require('./controladores/ocorrencias');
 const { listarAdministrador, obterAdministrador, editarAdministrador, deletarAdministrador } = require('./controladores/administradores');
-const { listarUsuarios, cadastrarUsuarios, obterPerfil, listarPorteiros, listarSindicos, editarPerfil, deletarUsuario } = require('./controladores/usuarios');
+const { listarUsuarios, cadastrarUsuarios, obterPerfil, listarPorteiros, listarSindicos, editarPerfil, deletarUsuario, listarMoradores } = require('./controladores/usuarios');
 const rotas = express();
 
 // testar rotas de ocorrencias;
@@ -49,8 +49,10 @@ rotas.post('/porteiro/ocorrencia', registrarOcorrencia);
 // adiministrador
 
 rotas.get('/administrador/usuarios', listarUsuarios);
+rotas.get('/administrador/moradores', listarMoradores);
 rotas.get('/administrador/administradores', listarAdministrador);
 rotas.get('/administrador/porteiros', listarPorteiros);
+rotas.get('/administrador/sindicos', listarSindicos);
 rotas.get('/administrador/ocorrencias', listarOcorrencias);
 rotas.get('/administrador/condominios', listarCondominio);
 

@@ -5,14 +5,13 @@ const jwtSecret = require('../jwt_secret');
 
 const cadastrarCondominio = async (req, res) => {
     try {
-        const { nome, email, senha_hash, moradores_total, localizacao } = req.body;
+        const { nome, email, senha_hash, localizacao } = req.body;
 
 
         await knex('condominio').insert({
             nome,
             email,
             senha_hash,
-            moradores_total,
             localizacao
         });
 
