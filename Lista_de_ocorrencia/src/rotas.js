@@ -17,7 +17,10 @@ rotas.get('/morador/condominio/:id', obterCondominio);
 
 rotas.post('/morador/ocorrencia/registrar', registrarOcorrencia);
 
-rotas.put('/morador/editar/:id', editarPerfil);
+rotas.put('/morador/perfil/editar/:id', editarPerfil);
+rotas.put('/morador/ocorrencia/editar/:id', editarOcorrencia);
+
+rotas.delete('/morador/ocorrencia/deletar/:id', deletarOcorrencia);
 
 
 // sindico
@@ -34,6 +37,7 @@ rotas.put('/sindico/perfil/editar/:id', editarPerfil);
 rotas.post('/sindico/ocorrencia/registrar', registrarOcorrencia);
 // rotas.put('/:id', editarCondominio);
 rotas.delete('/sindico/deletar/:id', deletarUsuario);
+rotas.delete('/sindico/ocorrencia/deletar/:id', deletarOcorrencia);
 
 // porteiro
 
@@ -44,6 +48,7 @@ rotas.put('/porteiro/perfil/editar/:id', editarPerfil);
 
 rotas.post('/porteiro/ocorrencia', registrarOcorrencia);
 
+rotas.delete('/porteiro/ocorrencia/deletar/:id', deletarOcorrencia);
 
 
 // adiministrador
@@ -56,16 +61,18 @@ rotas.get('/administrador/sindicos', listarSindicos);
 rotas.get('/administrador/ocorrencias', listarOcorrencias);
 rotas.get('/administrador/condominios', listarCondominio);
 
-rotas.get('/administrador/perfil/:id', obterPerfil);
+rotas.get('/administrador/perfil/:tipo/:id', obterPerfil);
+rotas.get('/administrador/ocorrencia/:id', obterOcorrencia);
 rotas.get('/administrador/condominio/:id', obterCondominio);
 
 rotas.post('/administrador/condominio/cadastrar', cadastrarCondominio)
 rotas.post('/administrador/Usuarios/cadastrar', cadastrarUsuarios)
 
-rotas.put('/administrador/perfil/editar/:id', editarPerfil);
+
+rotas.put('/administrador/perfil/editar/:tipo/:id', editarPerfil);
 rotas.put('/administrador/condominio/editar/:id', editarCondominio);
 
-rotas.delete('/administrador/usuario/deletar/:id', deletarUsuario);
+rotas.delete('/administrador/usuario/deletar/:tipo/:id', deletarUsuario);
 rotas.delete('/administrador/ocorrencia/deletar/:id', deletarOcorrencia);
 rotas.delete('/administrador/condominio/deletar/:id', deletarCondominio);
 

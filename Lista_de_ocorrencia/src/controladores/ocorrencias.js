@@ -20,12 +20,10 @@ const registrarOcorrencia = async (req, res) => {
     try {
         const { morador_id, sindico_id, porteiro_id, assunto, tipo_ocorrencia, nota, data_ocorrido, foto } = req.body;
 
-        // Verificar se pelo menos um dos IDs de morador, sindico ou porteiro foi fornecido
         if (!morador_id && !sindico_id && !porteiro_id) {
             return res.status(400).json({ erro: 'É necessário especificar quem registrou a ocorrência (morador_id, sindico_id ou porteiro_id).' });
         }
 
-        // Garantir que apenas um dos IDs (morador_id, sindico_id ou porteiro_id) esteja preenchido
         if ((morador_id && sindico_id) || (morador_id && porteiro_id) || (sindico_id && porteiro_id)) {
             return res.status(400).json({ erro: 'A ocorrência só pode ser registrada por um morador, um síndico ou um porteiro, não mais de um ao mesmo tempo.' });
         }
@@ -66,7 +64,36 @@ const obterOcorrencia = async (req, res) => {
 }
 
 const editarOcorrencia = async (req, res) => {
+    // sindico, morador ou porteiro
+    const { id } = req.params;
+    const { morador_id, sindico_id, porteiro_id, assunto, tipo_ocorrencia, nota, data_ocorrido, foto } = req.body;
 
+    try {
+        if (!morador_id && !sindico_id && !porteiro_id) {
+            return res.status(400).json({ erro: 'É necessário fornecer um morador_id, sindico_id ou porteiro_id.' });
+        }
+
+        const ocorrenciaExistente = await knex('ocorrencias').where({ id }).first();
+        if (!ocorrenciaExistente) {
+            return res.status(404).json({ mensagem: 'Ocorrência não encontrada.' });
+        }
+
+        await knex('ocorrencias').where({ id }).update({
+            morador_id,
+            sindico_id,
+            porteiro_id,
+            assunto,
+            tipo_ocorrencia,
+            nota,
+            data_ocorrido,
+            foto
+        });
+
+        return res.status(200).json({ mensagem: 'Ocorrência editada com sucesso.' });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ erro: 'Erro ao editar a ocorrência.' });
+    }
 };
 
 

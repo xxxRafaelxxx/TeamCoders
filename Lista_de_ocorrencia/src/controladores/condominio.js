@@ -28,11 +28,39 @@ const listarCondominio = async (req, res) => {
 };
 
 const obterCondominio = async (req, res) => {
+    const { id } = req.params;
+    const condominio = await knex('condominio')
+        .where({ id });
 
+    return res.json(condominio);
 };
 
 const editarCondominio = async (req, res) => {
+    const { id } = req.params;
+    const { nome, email, senha_hash, localizacao } = req.body;
 
+    try {
+        // Verifica se o condomínio existe
+        const condominioExistente = await knex('condominio').where({ id }).first();
+        if (!condominioExistente) {
+            return res.status(404).json({ mensagem: 'Condomínio não encontrado.' });
+        }
+
+        // Atualiza os dados do condomínio
+        await knex('condominio')
+            .where({ id })
+            .update({
+                nome,
+                email,
+                senha_hash,
+                localizacao
+            });
+
+        return res.status(200).json({ mensagem: 'Condomínio atualizado com sucesso.' });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ erro: 'Erro ao atualizar o condomínio.' });
+    }
 }
 const deletarCondominio = async (req, res) => {
     const { id } = req.params;
