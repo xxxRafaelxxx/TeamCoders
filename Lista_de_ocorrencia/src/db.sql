@@ -79,11 +79,11 @@ create table ocorrencias (
   FOREIGN KEY (porteiro_id) REFERENCES porteiros(id) ON DELETE CASCADE
 );
 
--- 1. Criar a função para atualizar moradores_total
+
 CREATE OR REPLACE FUNCTION atualizar_moradores_total_func()
 RETURNS TRIGGER AS $$
 BEGIN
-    -- Atualiza o campo moradores_total na tabela condominio
+   
     UPDATE condominio c
     SET moradores_total = (
         SELECT COUNT(*)
@@ -96,7 +96,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- 2. Criar o trigger para executar a função
+
 CREATE TRIGGER atualizar_moradores_total_trigger
 AFTER INSERT OR UPDATE OR DELETE ON moradores
 FOR EACH ROW

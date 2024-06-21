@@ -1,4 +1,6 @@
 const { knex } = require('../conexao');
+const securePassword = require("secure-password");
+const pwd = securePassword();
 const jwt = require("jsonwebtoken");
 const jwtSecret = require('../jwt_secret');
 
@@ -7,11 +9,40 @@ const cadastrarCondominio = async (req, res) => {
     try {
         const { nome, email, senha_hash, localizacao } = req.body;
 
+        if (!nome) {
+            return res.status(400).json("O campo nome é obrigatorio");
+        };
 
+        if (!email) {
+            return res.status(400).json("O campo email é obrigatorio");
+        };
+        if (!senha_hash) {
+            return res.status(400).json("O campo senha é obrigatorio");
+        };
+
+        if (!localizacao) {
+            return res.status(400).json("O campo localizacao é obrigatorio");
+        };
+
+        try {
+            const condominioEmail = await knex('condominio')
+                .where({ email: email })
+                .first();
+
+            if (condominioEmail) {
+                return res.status(400).json("O email já está cadastrado.");
+            };
+
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ erro: 'Erro ao cadastrar o condominio.' });
+        };
+
+        const hash = (await pwd.hash(Buffer.from(senha_hash))).toString("hex");
         await knex('condominio').insert({
             nome,
             email,
-            senha_hash,
+            senha_hash: hash,
             localizacao
         });
 
@@ -40,13 +71,12 @@ const editarCondominio = async (req, res) => {
     const { nome, email, senha_hash, localizacao } = req.body;
 
     try {
-        // Verifica se o condomínio existe
+
         const condominioExistente = await knex('condominio').where({ id }).first();
         if (!condominioExistente) {
             return res.status(404).json({ mensagem: 'Condomínio não encontrado.' });
         }
 
-        // Atualiza os dados do condomínio
         await knex('condominio')
             .where({ id })
             .update({

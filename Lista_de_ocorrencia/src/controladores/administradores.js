@@ -13,18 +13,27 @@ const listarAdministrador = async (req, res) => {
         console.error(error);
         return res.status(500).json({ erro: 'Erro ao listar os administradores.' });
     }
-}
+};
 
-const obterAdmnistrador = (req, res) => {
+const obterAdmnistrador = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const administrador = await knex('administradores')
+            .where({ id });
 
-}
+        return res.json(administrador);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ erro: 'Erro ao listar os administradores.' });
+    }
+};
 
 const editarAdministrador = (req, res) => {
 
-}
+};
 const deletarAdministrador = (req, res) => {
 
-}
+};
 
 module.exports = {
     listarAdministrador,

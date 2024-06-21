@@ -1,15 +1,14 @@
 const express = require('express')
-const { knex } = require('./conexao');
 const { cadastrarCondominio, listarCondominio, editarCondominio, obterCondominio, deletarCondominio } = require('./controladores/condominio');
 const { registrarOcorrencia, listarOcorrencias, obterOcorrencia, editarOcorrencia, deletarOcorrencia } = require('./controladores/ocorrencias');
 const { listarAdministrador, obterAdministrador, editarAdministrador, deletarAdministrador } = require('./controladores/administradores');
 const { listarUsuarios, cadastrarUsuarios, obterPerfil, listarPorteiros, listarSindicos, editarPerfil, deletarUsuario, listarMoradores } = require('./controladores/usuarios');
+const { login } = require('./controladores/login');
 const rotas = express();
-
-// testar rotas de ocorrencias;
 
 rotas.use(express.json());
 
+rotas.post('/usuario/login', login);
 // morador
 
 rotas.get('/morador/perfil/:id', obterPerfil);
@@ -51,14 +50,14 @@ rotas.post('/porteiro/ocorrencia', registrarOcorrencia);
 rotas.delete('/porteiro/ocorrencia/deletar/:id', deletarOcorrencia);
 
 
-// adiministrador
+// administrador
 
-rotas.get('/administrador/usuarios', listarUsuarios);
+rotas.get('/administrador/usuarios/:condominio_id', listarUsuarios);
 rotas.get('/administrador/moradores', listarMoradores);
 rotas.get('/administrador/administradores', listarAdministrador);
 rotas.get('/administrador/porteiros', listarPorteiros);
 rotas.get('/administrador/sindicos', listarSindicos);
-rotas.get('/administrador/ocorrencias', listarOcorrencias);
+rotas.get('/administrador/ocorrencias/:condominio_id', listarOcorrencias);
 rotas.get('/administrador/condominios', listarCondominio);
 
 rotas.get('/administrador/perfil/:tipo/:id', obterPerfil);

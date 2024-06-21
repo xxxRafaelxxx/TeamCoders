@@ -7,13 +7,34 @@ const jwtSecret = require('../jwt_secret');
 
 const listarOcorrencias = async (req, res) => {
     try {
-        const ocorrencias = await knex('ocorrencias');
-        return res.json(ocorrencias);
+        const { condominio_id } = req.params;
+
+        if (!condominio_id) {
+            return res.status(400).json("O campo condominio_id é obrigatorio");
+        }
+
+        const ocorrencias = await knex('ocorrencias')
+            .leftJoin('moradores', 'ocorrencias.morador_id', 'moradores.id')
+            .leftJoin('sindicos', 'ocorrencias.sindico_id', 'sindicos.id')
+            .leftJoin('porteiros', 'ocorrencias.porteiro_id', 'porteiros.id')
+            .select(
+                'ocorrencias.*',
+                'moradores.condominio_id as morador_condominio_id',
+                'sindicos.condominio_id as sindico_condominio_id',
+                'porteiros.condominio_id as porteiro_condominio_id'
+            )
+            .where('moradores.condominio_id', condominio_id)
+            .orWhere('sindicos.condominio_id', condominio_id)
+            .orWhere('porteiros.condominio_id', condominio_id);
+
+        return res.status(200).json(ocorrencias);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ erro: 'Erro ao listar as ocorrências.' });
     }
-}
+
+};
+
 
 const registrarOcorrencia = async (req, res) => {
     // sind, mor ou por

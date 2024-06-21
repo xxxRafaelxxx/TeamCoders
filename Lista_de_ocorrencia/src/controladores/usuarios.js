@@ -1,17 +1,22 @@
 const { knex } = require('../conexao');
 const securePassword = require("secure-password");
 const pwd = securePassword();
-const jwt = require("jsonwebtoken");
-const jwtSecret = require('../jwt_secret');
+
 
 
 
 const listarUsuarios = async (req, res) => {
     try {
-        const moradores = await knex('moradores').select();
-        const sindicos = await knex('sindicos').select();
-        const porteiros = await knex('porteiros').select();
-        const administradores = await knex('administradores').select();
+        const { condominio_id } = req.params;
+
+        if (!condominio_id) {
+            return res.status(400).json("O campo condominio_id é obrigatorio");
+        }
+
+        const moradores = await knex('moradores').where({ condominio_id }).select();
+        const sindicos = await knex('sindicos').where({ condominio_id }).select();
+        const porteiros = await knex('porteiros').where({ condominio_id }).select();
+        const administradores = await knex('administradores').where({ condominio_id }).select();
 
         const usuarios = {
             moradores,
@@ -25,7 +30,7 @@ const listarUsuarios = async (req, res) => {
         console.error(error);
         return res.status(500).json({ erro: 'Erro ao listar os usuários.' });
     }
-}
+};
 
 
 const cadastrarUsuarios = async (req, res) => {
@@ -34,6 +39,41 @@ const cadastrarUsuarios = async (req, res) => {
         let dadosUsuario;
         const { casa } = req.body;
 
+        if (!nome) {
+            return res.status(400).json("O campo nome é obrigatorio");
+        };
+        if (!condominio_id) {
+            return res.status(400).json("O campo condominio id é obrigatorio");
+        };
+        if (!email) {
+            return res.status(400).json("O campo email é obrigatorio");
+        };
+        if (!senha_hash) {
+            return res.status(400).json("O campo senha é obrigatorio");
+        };
+        if (!telefone) {
+            return res.status(400).json("O campo telefone é obrigatorio");
+        };
+        if (!status) {
+            return res.status(400).json("O campo status é obrigatorio");
+        };
+
+
+        try {
+            const usuarioExistentePorteiro = await knex('porteiros').where({ email }).first();
+            const usuarioExistenteSindico = await knex('sindicos').where({ email }).first();
+            const usuarioExistenteMorador = await knex('moradores').where({ email }).first();
+            const usuarioExistenteAdministrador = await knex('administradores').where({ email }).first();
+
+            if (usuarioExistentePorteiro || usuarioExistenteSindico || usuarioExistenteMorador || usuarioExistenteAdministrador) {
+                return res.status(400).json("O email já está cadastrado");
+            }
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ erro: 'Erro ao cadastrar o usuário.' });
+        };
+
+        const hash = (await pwd.hash(Buffer.from(senha_hash))).toString("hex");
         switch (status.toLowerCase().trim()) {
             case 'porteiro':
                 await knex('porteiros').insert({
@@ -41,25 +81,26 @@ const cadastrarUsuarios = async (req, res) => {
                     nome,
                     email,
                     telefone,
-                    senha_hash,
+                    senha_hash: hash,
                     status
                 });
                 break;
             case 'sindico':
-                dadosUsuario = { condominio_id, nome, email, telefone, senha_hash, status, casa };
-                await knex('sindicos').insert(dadosUsuario); await knex('condominio')
+                dadosUsuario = { condominio_id, nome, email, telefone, senha_hash: hash, status, casa };
+                await knex('sindicos').insert(dadosUsuario);
+                await knex('condominio')
                     .where('id', condominio_id)
-                    .increment('moradores_total', 1)
+                    .increment('moradores_total', 1);
                 break;
             case 'morador':
-                dadosUsuario = { condominio_id, nome, email, telefone, senha_hash, status, casa };
+                dadosUsuario = { condominio_id, nome, email, telefone, senha_hash: hash, status, casa };
                 await knex('moradores').insert(dadosUsuario);
                 await knex('condominio')
                     .where('id', condominio_id)
-                    .increment('moradores_total', 1)
+                    .increment('moradores_total', 1);
                 break;
             case 'administrador':
-                dadosUsuario = { condominio_id, nome, email, telefone, senha_hash, status };
+                dadosUsuario = { condominio_id, nome, email, telefone, senha_hash: hash, status };
                 await knex('administradores').insert(dadosUsuario);
                 break;
             default:
