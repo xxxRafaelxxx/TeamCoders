@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" integrity="sha512-OQDNdI5rpnZ0BRhhJc+btbbtnxaj+LdQFeh0V9/igiEPDiWE2fG+ZsXl0JEH+bjXKPJ3zcXqNyP4/F/NegVdZg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css"
+        integrity="sha512-OQDNdI5rpnZ0BRhhJc+btbbtnxaj+LdQFeh0V9/igiEPDiWE2fG+ZsXl0JEH+bjXKPJ3zcXqNyP4/F/NegVdZg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/button.css">
     <link rel="stylesheet" href="css/records.css">
@@ -17,6 +23,7 @@
     <script src="main.js" defer></script>
     <title>CRUD</title>
 </head>
+
 <body>
     <header>
         <img src="img/CodoLog.png" alt="" class="header-logo">
@@ -24,145 +31,135 @@
         </h1>
     </header>
     <div class="container">
-    <nav id="sidebar">
-        <div id="sidebar_content">
-        <div id="user">
-            <img src="user-fill.svg" id="user-avatar" alt="Avatar">
-            <p id="user-infos">
-                <span class="item-description">
-                    Nome Fulano
-                </span>
-                <span class="item-description">
-                    Administrador
-                </span>
-            </p>
-        </div>
-        
-        <ul id="side_items">
-            <li class="side-item">
-                <a href="condominio/condominio.html">
-                    <i class="fa-solid fa-house"></i>
-                    <span class="item-description">
-                        Condomínio
-                    </span>
-                </a>
-            </li>
+        <nav id="sidebar">
+            <div id="sidebar_content">
+                <div id="user">
+                    <img src="user-fill.svg" id="user-avatar" alt="Avatar">
+                    <p id="user-infos">
+                        <span class="item-description">
+                            Nome Fulano
+                        </span>
+                        <span class="item-description">
+                            Administrador
+                        </span>
+                    </p>
+                </div>
 
-            <li class="side-item active">
-                <a href="index.html">
-                    <i class="fa-solid fa-user-group"></i>
-                    <span class="item-description">
-                        Usuários
-                    </span>
-                </a>
-            </li>
+                <ul id="side_items">
+                    <li class="side-item">
+                        <a href="condominio/condominio.html">
+                            <i class="fa-solid fa-house"></i>
+                            <span class="item-description">
+                                Condomínio
+                            </span>
+                        </a>
+                    </li>
 
-            <li class="side-item">
-            <a href="../adm/ocorrencias/ocorrencias.html">
-                    <i class="fa-solid fa-book"></i>
-                    <span class="item-description">
-                        Ocorrências
-                    </span>
-                </a>
-            </li>
-        </ul>
+                    <li class="side-item active">
+                        <a href="index.html">
+                            <i class="fa-solid fa-user-group"></i>
+                            <span class="item-description">
+                                Usuários
+                            </span>
+                        </a>
+                    </li>
 
-        <button id="open_btn">
-            <a href="perfil/perfil.html">
-            <i id="open_btn_icon" class="fa-solid fa-chevron-right"></i>
-        </a>
-        </button>
-        
-    </div>
+                    <li class="side-item">
+                        <a href="../adm/ocorrencias/ocorrencias.html">
+                            <i class="fa-solid fa-book"></i>
+                            <span class="item-description">
+                                Ocorrências
+                            </span>
+                        </a>
+                    </li>
+                </ul>
 
-        <div id="logout">
-            <button id="logout_btn">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <span class="item-description">
-                    Sair
-                </span>
-            </button>
-        </div>
-    </nav>
-    <main>
-        <button type="button" class="button blue mobile" id="cadastrarCliente">Cadastrar Cliente</button>
-        <table class="records"> <!--Tabela de gravações do cadastro do cliente-->
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th>Senha</th>
-                    <th>Celular</th>
-                    <th>Quadra e Apartamento</th>
-                    <th>Usuário</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Maria</td>
-                    <td>maria@gmail.com</td>
-                    <td>12345678</td>
-                    <td>(71) 97165-1111</td>
-                    <td>Quadra B / AP 201</td>
-                    <td>Morador</td>
-                    <td>
-                        <button type="button" class="button green">editar</button>
-                        <button type="button" class="button red">excluir</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>João Pedro</td>
-                    <td>joao@gmail.com</td>
-                    <td>12345678</td>
-                    <td>(71) 97165-1111</td>
-                    <td>Quadra B / AP 201</td>
-                    <td>Morador</td>
-                    <td>
-                        <button type="button" class="button green">editar</button>
-                        <button type="button" class="button red">excluir</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Jose da Silva</td>
-                    <td>jose@gmail.com</td>
-                    <td>12345678</td>
-                    <td>(71) 97165-1111</td>
-                    <td>Quadra B / AP 201</td>
-                    <td>Síndico</td>
-                    <td>
-                        <button type="button" class="button green">editar</button>
-                        <button type="button" class="button red">excluir</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="modal" id="modal">
-            <div class="modal-content">
-                <header class="modal-header">
-                    <h2>Adicionar Usuário</h2>
-                    <span class="modal-close" id="modalClose">&#10006;</span>
-                </header>
-                <form class="modal-form">
-                    <input type="text" class="modal-field" placeholder="Nome do Usuário">
-                    <input type="email" class="modal-field" placeholder="E-mail do Usuário">
-                    <input type="email" class="modal-field" placeholder="Senha">
-                    <input type="text" class="modal-field" placeholder="Celular do Usuário">
-                    <input type="text" class="modal-field" placeholder="Quadra e Apartamento">
-                    <select class="modal-field" id="userType">
-                        <option value="" disabled selected>Selecione o Tipo de Usuário</option>
-                        <option value="morador">Morador</option>
-                        <option value="sindico">Síndico</option>
-                        <option value="visitante">Porteiro</option>
-                    </select>
-                </form>
-                <footer class="modal-footer">
-                    <button class="button green">Salvar</button>
-                    <button class="button blue">Cancelar</button>
-                </footer>
+                <button id="open_btn">
+                    <a href="perfil/perfil.html">
+                        <i id="open_btn_icon" class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </button>
+
             </div>
-        </div>
-    </main>
-</div>
+
+            <div id="logout">
+                <button id="logout_btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span class="item-description">
+                        Sair
+                    </span>
+                </button>
+            </div>
+        </nav>
+        <main>
+            <button type="button" class="button blue mobile" id="cadastrarCliente">Cadastrar Cliente</button>
+            <table class="records">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Celular</th>
+                        <th>Casa</th>
+                        <th>Usuário</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aqui serão adicionadas as linhas da tabela dinamicamente -->
+                </tbody>
+            </table>
+
+            <!-- Modal para adicionar usuário -->
+            <div class="modal" id="modal-adicionar">
+                <div class="modal-content">
+                    <header class="modal-header">
+                        <h2>Adicionar Usuário</h2>
+                        <span class="modal-close" id="modalClose">&#10006;</span>
+                    </header>
+                    <form class="modal-form" id="formCadastrar">
+                        <input type="text" class="modal-field" placeholder="Nome do Usuário">
+                        <input type="email" class="modal-field" placeholder="E-mail do Usuário">
+                        <input type="password" class="modal-field" placeholder="Senha">
+                        <input type="text" class="modal-field" placeholder="Celular do Usuário">
+                        <input type="text" class="modal-field" placeholder="Quadra e Apartamento">
+                        <select class="modal-field" id="userType">
+                            <option value="" disabled selected>Selecione o Tipo de Usuário</option>
+                            <option value="morador">Morador</option>
+                            <option value="sindico">Síndico</option>
+                            <option value="visitante">Porteiro</option>
+                        </select>
+                        <button type="submit" class="button green">Salvar</button>
+                        <button type="button" class="button blue" id="btnCancelarCadastrar">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Modal para editar usuário -->
+            <div class="modal" id="modal-editar">
+                <div class="modal-content">
+                    <header class="modal-header">
+                        <h2>Editar Usuário</h2>
+                        <span class="modal-close" id="modalCloseEditar">&#10006;</span>
+                    </header>
+                    <form class="modal-form" id="formEditar">
+                        <input type="text" class="modal-field" placeholder="Nome do Usuário">
+                        <input type="email" class="modal-field" placeholder="E-mail do Usuário">
+                        <input type="password" class="modal-field" placeholder="Senha">
+                        <input type="text" class="modal-field" placeholder="Celular do Usuário">
+                        <input type="text" class="modal-field" placeholder="Quadra e Apartamento">
+                        <select class="modal-field" id="userTypeEditar">
+                            <option value="" disabled selected>Selecione o Tipo de Usuário</option>
+                            <option value="morador">Morador</option>
+                            <option value="sindico">Síndico</option>
+                            <option value="visitante">Porteiro</option>
+                        </select>
+                        <button type="submit" class="button green" id="btnSalvarEditar">Salvar</button>
+                        <button type="button" class="button blue" id="btnCancelarEditar">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
 </body>
+
 </html>

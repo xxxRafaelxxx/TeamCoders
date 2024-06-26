@@ -1,44 +1,75 @@
- // Get the modal
-    var modal = document.getElementById("modal");
+async function fetchAndDisplayOccurrences() {
+    try {
+        const token = localStorage.getItem('token');
+        const decodedToken = JSON.parse(atob(token.split('.')[1]));
+        const condominioId = decodedToken.condominio_id;
 
-    // Get the button that opens the modal
-    var btn = document.getElementById("editarInformacoes");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+        const response = await fetch(`http://localhost:3000/administrador/ocorrencias/${condominioId}`);
+        if (!response.ok) {
+            throw new Error('Erro ao buscar ocorrências');
         }
+
+        const ocorrencias = await response.json();
+        const tbody = document.querySelector('.records tbody');
+        tbody.innerHTML = ''; // Limpa o conteúdo atual da tabela
+
+        ocorrencias.forEach((ocorrencia) => {
+            let emissor;
+            if (ocorrencia.morador_id !== null) {
+                emissor = ocorrencia.morador_id;
+            } else if (ocorrencia.sindico_id !== null) {
+                emissor = ocorrencia.sindico_id;
+            } else {
+                emissor = ocorrencia.porteiro_id;
+            }
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${ocorrencia.assunto}</td>
+                <td>${ocorrencia.tipo_ocorrencia}</td>
+                <td>${formatarData(ocorrencia.data_ocorrido)}</td>
+                <td>${emissor}</td>
+                <td>
+                    <button type="button" class="button blue" onclick="verNotas(${ocorrencia.id})">Ver</button>
+                    <button type="button" class="button green" onclick="openModal(this, ${ocorrencia.status})">Ver status</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    } catch (error) {
+        console.error(error);
+        alert('Erro ao buscar ocorrências');
     }
+}
 
-    // Editar informações
-    var formEditar = document.getElementById("formEditar");
+async function verNotas(ocorrenciaId) {
+    try {
+        const token = localStorage.getItem('token');
+        const decodedToken = JSON.parse(atob(token.split('.')[1]));
+        const condominioId = decodedToken.condominio_id;
 
-    formEditar.addEventListener("submit", function(event) {
-        event.preventDefault();
+        const response = await fetch(`http://localhost:3000/administrador/ocorrencia/${ocorrenciaId}/${condominioId}`);
+        if (!response.ok) {
+            throw new Error('Erro ao buscar notas da ocorrência');
+        }
 
-        document.getElementById("totalMoradores").textContent = document.getElementById("totalMoradoresInput").value;
-        document.getElementById("localizacao").textContent = document.getElementById("localizacaoInput").value;
-        document.getElementById("contatoSindicos").textContent = document.getElementById("contatoSindicosInput").value;
-        document.getElementById("emailAdministracao").textContent = document.getElementById("emailAdministracaoInput").value;
-        document.getElementById("numeroAdministracao").textContent = document.getElementById("numeroAdministracaoInput").value;
-        document.getElementById("numeroPortaria").textContent = document.getElementById("numeroPortariaInput").value;
+        const ocorrencia = await response.json();
+        // Aqui você pode manipular a exibição das notas, por exemplo:
+        console.log('Notas da ocorrência:', ocorrencia.nota);
+        // Implemente a lógica para exibir as notas no modal ou onde desejar na interface
+        alert(ocorrencia.nota);
 
-        modal.style.display = "none";
-    });
+    } catch (error) {
+        console.error(error);
+        alert('Erro ao buscar notas da ocorrência');
+    }
+}
+
+function formatarData(data) {
+    const dataObj = new Date(data);
+    return `${dataObj.getDate()}/${dataObj.getMonth() + 1}/${dataObj.getFullYear()}`;
+}
 
 
-    
+// Função para chamar a busca e exibição das ocorrências ao carregar a página
+document.addEventListener('DOMContentLoaded', fetchAndDisplayOccurrences);

@@ -1,8 +1,10 @@
 const { knex } = require('../conexao');
 const securePassword = require("secure-password");
 const pwd = securePassword();
-
-
+const jwt = require('jsonwebtoken');
+const jwtSecret = require('../jwt_secret');
+const nodemailer = require('../nodemailer');
+const { text } = require('express');
 
 
 const listarUsuarios = async (req, res) => {
@@ -34,31 +36,22 @@ const listarUsuarios = async (req, res) => {
 
 
 const cadastrarUsuarios = async (req, res) => {
+    const { condominio_id } = req.params;
     try {
-        const { condominio_id, nome, email, telefone, senha_hash, status } = req.body;
+        const { nome, email, telefone, senha_hash, status, token } = req.body;
         let dadosUsuario;
-        const { casa } = req.body;
+        const { casa } = req.body
 
-        if (!nome) {
-            return res.status(400).json("O campo nome é obrigatorio");
-        };
-        if (!condominio_id) {
-            return res.status(400).json("O campo condominio id é obrigatorio");
-        };
-        if (!email) {
-            return res.status(400).json("O campo email é obrigatorio");
-        };
-        if (!senha_hash) {
-            return res.status(400).json("O campo senha é obrigatorio");
-        };
-        if (!telefone) {
-            return res.status(400).json("O campo telefone é obrigatorio");
-        };
-        if (!status) {
-            return res.status(400).json("O campo status é obrigatorio");
-        };
+        if (!nome || !condominio_id || !email || !senha_hash || !telefone || !status || !token) {
+            return res.status(400).json({ erro: 'Todos os campos são obrigatórios.' });
+        }
 
-
+        let usuario;
+        try {
+            usuario = jwt.verify(token, jwtSecret);
+        } catch (error) {
+            return res.status(400).json({ erro: 'O token é inválido.' });
+        }
         try {
             const usuarioExistentePorteiro = await knex('porteiros').where({ email }).first();
             const usuarioExistenteSindico = await knex('sindicos').where({ email }).first();
@@ -107,6 +100,16 @@ const cadastrarUsuarios = async (req, res) => {
                 return res.status(400).json({ erro: 'Tipo de usuário inválido.' });
         }
 
+        // const dadosEnvio = {
+        //     from: 'Codolog <nao-responder@sandboxc5a9087332d94d95a529fa103f5aec83.mailgun.org>',
+        //     to: email,
+        //     subject: 'Bem vindo ao Codolog',
+        //     text: `Olá ${nome}. Você foi cadastrado no nosso site e ja pode fazer o login com o email: ${email} e a ${senha_hash}.
+        //     OBS:essa é uma senha padrão lembre de troca-la`
+        // }
+
+        // await nodemailer.sendMail(dadosEnvio);
+
         return res.status(201).json({ mensagem: 'Usuário cadastrado com sucesso.' });
     } catch (error) {
         console.error(error);
@@ -148,70 +151,49 @@ const obterPerfil = async (req, res) => {
     }
 };
 
+
 const editarPerfil = async (req, res) => {
-    const { id } = req.params;
-    const { nome, email, telefone, senha_hash, status, casa, condominio_id } = req.body;
-
-    let tabelaOrigem, tabelaDestino;
-    switch (status.toLowerCase()) {
-        case 'morador':
-            tabelaDestino = 'moradores';
-            break;
-        case 'sindico':
-            tabelaDestino = 'sindicos';
-            break;
-        case 'porteiro':
-            tabelaDestino = 'porteiros';
-            break;
-        case 'administrador':
-            tabelaDestino = 'administradores';
-            break;
-        default:
-            return res.status(400).json({ erro: 'Tipo de usuário inválido.' });
-    }
-
-    const tabelas = ['moradores', 'sindicos', 'porteiros', 'administradores'];
-    for (const tabela of tabelas) {
-        const usuario = await knex(tabela).where({ id }).first();
-        if (usuario) {
-            tabelaOrigem = tabela;
-            break;
-        }
-    }
-
-    if (!tabelaOrigem) {
-        return res.status(404).json({ mensagem: 'Usuário não encontrado.' });
-    }
+    const { id, tipo } = req.params;
+    const { email, telefone, senha_hash } = req.body;
 
     try {
-        if (tabelaOrigem === tabelaDestino) {
-            await knex(tabelaOrigem)
-                .where({ id })
-                .update({
-                    nome,
-                    email,
-                    telefone,
-                    senha_hash,
-                    status,
-                    casa
-                });
-        } else {
-
-            await knex(tabelaDestino).insert({
-                id,
-                condominio_id,
-                nome,
-                email,
-                telefone,
-                senha_hash,
-                status,
-                casa
-            });
-
-            await knex(tabelaOrigem)
-                .where({ id })
-                .del();
+        let tabela;
+        switch (tipo.toLowerCase()) {
+            case 'morador':
+                tabela = 'moradores';
+                break;
+            case 'sindico':
+                tabela = 'sindicos';
+                break;
+            case 'porteiro':
+                tabela = 'porteiros';
+                break;
+            case 'administrador':
+                tabela = 'administradores';
+                break;
+            default:
+                return res.status(400).json({ erro: 'Tipo de usuário inválido.' });
         }
+
+        const usuario = await knex(tabela).where({ id }).first();
+        if (!usuario) {
+            return res.status(404).json({ mensagem: 'Usuário não encontrado.' });
+        }
+
+        let updateFields = {};
+        if (email) {
+            updateFields.email = email;
+        }
+        if (telefone) {
+            updateFields.telefone = telefone;
+        }
+        if (senha_hash) {
+            // Hash da senha, se fornecida
+            const hash = (await pwd.hash(Buffer.from(senha_hash))).toString("hex");
+            updateFields.senha_hash = hash;
+        }
+
+        await knex(tabela).where({ id }).update(updateFields);
 
         return res.status(200).json({ mensagem: 'Usuário atualizado com sucesso.' });
     } catch (error) {
@@ -219,6 +201,8 @@ const editarPerfil = async (req, res) => {
         return res.status(500).json({ erro: 'Erro ao atualizar o usuário.' });
     }
 };
+
+
 
 const deletarUsuario = async (req, res) => {
     const { tipo, id } = req.params;
@@ -260,21 +244,39 @@ const deletarUsuario = async (req, res) => {
 
 const listarPorteiros = async (req, res) => {
     try {
-        const porteiros = await knex('porteiros');
-        return res.json(porteiros);
+        const { condominio_id } = req.params;
+
+        if (!condominio_id) {
+            return res.status(400).json("O campo condominio_id é obrigatorio");
+        }
+
+        const porteiros = await knex('porteiros').where({ condominio_id }).select();
+
+        const usuarios = {
+            porteiros,
+        };
+
+        return res.status(200).json(usuarios);
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ erro: 'Erro ao listar os porteiros.' });
+        return res.status(500).json({ erro: 'Erro ao listar os usuários.' });
     }
 };
 
 const listarSindicos = async (req, res) => {
     try {
-        const sindicos = await knex('sindicos');
-        return res.json(sindicos);
+        const { condominio_id } = req.params;
+
+        if (!condominio_id) {
+            return res.status(400).json("O campo condominio_id é obrigatorio");
+        }
+
+        const sindicos = await knex('sindicos').where({ condominio_id }).select();
+
+        return res.status(200).json(sindicos);
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ erro: 'Erro ao listar os sindicos.' });
+        return res.status(500).json({ erro: 'Erro ao listar os usuários.' });
     }
 };
 

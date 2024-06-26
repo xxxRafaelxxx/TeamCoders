@@ -1,44 +1,81 @@
- // Get the modal
-    var modal = document.getElementById("modal");
+'use strict';
 
-    // Get the button that opens the modal
-    var btn = document.getElementById("editarInformacoes");
+document.addEventListener('DOMContentLoaded', async () => {
+    const token = localStorage.getItem('token');
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal
-    btn.onclick = function() {
-        modal.style.display = "block";
+    if (!token) {
+        console.error('Token não encontrado');
+        return;
     }
 
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
+    try {
+        await getUserInfo(token);
+    } catch (erro) {
+        messeage.json(erro)
     }
+});
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+const getUserInfo = async (token) => {
+    try {
+        const decodedToken = JSON.parse(atob(token.split('.')[1]));
+        const userId = decodedToken.id;
+        const status = decodedToken.status;
+        const condominioId = decodedToken.condominio_id;
+
+        const userInfoResponse = await fetch(`http://localhost:3000/administrador/perfil/${status}/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+
+        if (!userInfoResponse.ok) {
+            throw new Error('Erro ao obter informações do usuário');
         }
+
+        const userInfo = await userInfoResponse.json();
+
+        const condominioResponse = await fetch(`http://localhost:3000/administrador/condominio/${condominioId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+
+        if (!condominioResponse.ok) {
+            throw new Error('Erro ao obter informações do condomínio');
+        }
+
+        const condominioInfo = await condominioResponse.json();
+
+        const sindicoInfoResponse = await fetch(`http://localhost:3000/administrador/sindicos/${condominioId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+
+        if (!sindicoInfoResponse.ok) {
+            throw new Error('Erro ao obter informações do síndico');
+        }
+
+        const sindicoInfo = await sindicoInfoResponse.json();
+
+        fillUserInfo(condominioInfo, userInfo, sindicoInfo);
+    } catch (error) {
+        console.error('Erro ao obter informações do usuário:', error);
     }
+};
 
-    // Editar informações
-    var formEditar = document.getElementById("formEditar");
-
-    formEditar.addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        document.getElementById("totalMoradores").textContent = document.getElementById("totalMoradoresInput").value;
-        document.getElementById("localizacao").textContent = document.getElementById("localizacaoInput").value;
-        document.getElementById("contatoSindicos").textContent = document.getElementById("contatoSindicosInput").value;
-        document.getElementById("emailAdministracao").textContent = document.getElementById("emailAdministracaoInput").value;
-        document.getElementById("numeroAdministracao").textContent = document.getElementById("numeroAdministracaoInput").value;
-        document.getElementById("numeroPortaria").textContent = document.getElementById("numeroPortariaInput").value;
-
-        modal.style.display = "none";
-    });
+const fillUserInfo = (condominioInfo, userInfo, sindicoInfo) => {
+    document.getElementById('condominio-nome').textContent = condominioInfo.nome;
+    document.getElementById('total-moradores').textContent = condominioInfo.moradores_total;
+    document.getElementById('localizacao').textContent = condominioInfo.localizacao;
+    document.getElementById('contato-sindico').textContent = sindicoInfo.length > 0 ? sindicoInfo[0].telefone : 'N/A';
+    document.getElementById('email-administracao').textContent = userInfo.email;
+    document.getElementById('numero-administracao').textContent = userInfo.telefone;
+    document.getElementById('numero-portaria').textContent = condominioInfo.telefone_portaria;
 
 
-    
+};
+

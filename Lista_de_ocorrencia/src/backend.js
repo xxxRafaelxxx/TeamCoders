@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const rotas = require('./rotas');
@@ -14,7 +15,7 @@ const corsOptions = {
             callback(new Error('Not allowed by CORS'));
         }
     },
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], // Métodos permitidos
     allowedHeaders: ['Content-Type', 'Authorization'] // Cabeçalhos permitidos
 };
 
@@ -36,7 +37,6 @@ app.use(function (err, req, res, next) {
     }
 });
 
+
 // Iniciando o servidor na porta 3000
-app.listen(3000, () => {
-    console.log('Servidor backend está rodando na porta 3000');
-});
+app.listen(3000);

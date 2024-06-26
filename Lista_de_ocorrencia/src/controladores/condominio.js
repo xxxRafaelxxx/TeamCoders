@@ -60,38 +60,50 @@ const listarCondominio = async (req, res) => {
 
 const obterCondominio = async (req, res) => {
     const { id } = req.params;
-    const condominio = await knex('condominio')
-        .where({ id });
+    try {
+        const condominio = await knex('condominio')
+            .where({ id })
+            .first(); // Adiciona .first() para retornar apenas o primeiro resultado
 
-    return res.json(condominio);
+        if (!condominio) {
+            return res.status(404).json({ error: 'Condomínio não encontrado' });
+        }
+
+        return res.json(condominio);
+    } catch (error) {
+        console.error('Erro ao buscar condomínio:', error);
+        return res.status(500).json({ error: 'Erro interno do servidor' });
+    }
 };
 
 const editarCondominio = async (req, res) => {
     const { id } = req.params;
-    const { nome, email, senha_hash, localizacao } = req.body;
+    const { nome, email, localizacao, telefone_portaria } = req.body; // Adicione todos os campos que podem ser atualizados
 
     try {
-
         const condominioExistente = await knex('condominio').where({ id }).first();
         if (!condominioExistente) {
             return res.status(404).json({ mensagem: 'Condomínio não encontrado.' });
         }
 
+        // Crie um objeto com todos os campos que podem ser atualizados
+        let dadosAtualizados = {};
+        if (nome !== undefined) dadosAtualizados.nome = nome;
+        if (email !== undefined) dadosAtualizados.email = email;
+        if (localizacao !== undefined) dadosAtualizados.localizacao = localizacao;
+        if (telefone_portaria !== undefined) dadosAtualizados.telefone_portaria = telefone_portaria;
+
         await knex('condominio')
             .where({ id })
-            .update({
-                nome,
-                email,
-                senha_hash,
-                localizacao
-            });
+            .update(dadosAtualizados);
 
         return res.status(200).json({ mensagem: 'Condomínio atualizado com sucesso.' });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ erro: 'Erro ao atualizar o condomínio.' });
     }
-}
+};
+
 const deletarCondominio = async (req, res) => {
     const { id } = req.params;
     try {

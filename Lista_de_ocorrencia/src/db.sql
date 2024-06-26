@@ -6,7 +6,8 @@ create table condominio (
     email TEXT NOT NULL,
     senha_hash TEXT NOT NULL,
     moradores_total INTEGER,
-    localizacao TEXT NOT NULL
+    localizacao TEXT NOT NULL,
+    telefone_portaria VARCHAR(20) 
 );
 
 drop table if exists moradores;
@@ -16,7 +17,7 @@ create table moradores (
     condominio_id INTEGER NOT NULL,
     nome TEXT NOT NULL,
     email TEXT NOT NULL,
-    telefone VARCHAR(20) NOT NULL,
+    telefone VARCHAR(20) NOT NULL
     senha_hash TEXT NOT NULL,
     status TEXT NOT NULL,
     casa SMALLINT NOT NULL,
@@ -30,6 +31,7 @@ create table administradores (
     condominio_id INTEGER NOT NULL,
     nome TEXT NOT NULL,
     email TEXT NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
     senha_hash TEXT NOT NULL,
     status TEXT NOT NULL,
     FOREIGN KEY (condominio_id) REFERENCES condominio(id) ON DELETE CASCADE
@@ -66,6 +68,7 @@ drop table if exists ocorrencias;
 
 create table ocorrencias (
     id serial primary key,
+     condominio_id INTEGER NOT NULL,
     morador_id INTEGER ,
     sindico_id INTEGER ,
    porteiro_id INTEGER ,
@@ -76,7 +79,8 @@ create table ocorrencias (
     foto BYTEA ,
     FOREIGN KEY (morador_id) REFERENCES moradores(id) ON DELETE CASCADE,
     FOREIGN KEY (sindico_id) REFERENCES sindicos(id) ON DELETE CASCADE,
-  FOREIGN KEY (porteiro_id) REFERENCES porteiros(id) ON DELETE CASCADE
+  FOREIGN KEY (porteiro_id) REFERENCES porteiros(id) ON DELETE CASCADE,
+  FOREIGN KEY (condominio_id) REFERENCES condominio(id) ON DELETE CASCADE
 );
 
 
@@ -101,3 +105,5 @@ CREATE TRIGGER atualizar_moradores_total_trigger
 AFTER INSERT OR UPDATE OR DELETE ON moradores
 FOR EACH ROW
 EXECUTE FUNCTION atualizar_moradores_total_func();
+
+wdTE97OL2IR7MZN
