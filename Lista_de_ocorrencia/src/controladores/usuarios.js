@@ -150,7 +150,64 @@ const obterPerfil = async (req, res) => {
         return res.status(500).json({ erro: 'Erro ao obter o perfil do usuário.' });
     }
 };
+const editarUsuario = async (req, res) => {
+    const { id, tipo } = req.params;
+    const { nome, email, telefone, casa, senha_hash, status } = req.body;
 
+    try {
+        let tabela;
+        switch (tipo.toLowerCase()) {
+            case 'morador':
+                tabela = 'moradores';
+                break;
+            case 'sindico':
+                tabela = 'sindicos';
+                break;
+            case 'porteiro':
+                tabela = 'porteiros';
+                break;
+            case 'administrador':
+                tabela = 'administradores';
+                break;
+            default:
+                return res.status(400).json({ erro: 'Tipo de usuário inválido.' });
+        }
+
+        const usuario = await knex(tabela).where({ id }).first();
+        if (!usuario) {
+            return res.status(404).json({ mensagem: 'Usuário não encontrado.' });
+        }
+
+        let updateFields = {};
+        if (nome) {
+            updateFields.nome = nome;
+        }
+        if (email) {
+            updateFields.email = email;
+        }
+        if (casa) {
+            updateFields.casa = casa;
+        }
+        if (telefone) {
+            updateFields.telefone = telefone;
+        }
+        if (status) {
+            updateFields.status = status;
+        }
+        if (senha_hash) {
+            // Hash da senha, se fornecida
+            const hash = (await pwd.hash(Buffer.from(senha_hash))).toString("hex");
+            updateFields.senha_hash = hash;
+        }
+
+        await knex(tabela).where({ id }).update(updateFields);
+
+        return res.status(200).json({ mensagem: 'Usuário atualizado com sucesso.' });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ erro: 'Erro ao atualizar o usuário.' });
+    }
+};
 
 const editarPerfil = async (req, res) => {
     const { id, tipo } = req.params;
@@ -297,6 +354,7 @@ module.exports = {
     cadastrarUsuarios,
     obterPerfil,
     editarPerfil,
+    editarUsuario,
     deletarUsuario,
     listarPorteiros,
     listarSindicos,

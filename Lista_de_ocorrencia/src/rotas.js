@@ -2,7 +2,7 @@ const express = require('express')
 const { cadastrarCondominio, listarCondominio, editarCondominio, obterCondominio, deletarCondominio } = require('./controladores/condominio');
 const { registrarOcorrencia, listarOcorrencias, obterOcorrencia, editarOcorrencia, deletarOcorrencia } = require('./controladores/ocorrencias');
 const { listarAdministrador, obterAdministrador, editarAdministrador, deletarAdministrador, cadastrarAdministrador } = require('./controladores/administradores');
-const { listarUsuarios, cadastrarUsuarios, obterPerfil, listarPorteiros, listarSindicos, editarPerfil, deletarUsuario, listarMoradores } = require('./controladores/usuarios');
+const { listarUsuarios, cadastrarUsuarios, obterPerfil, listarPorteiros, listarSindicos, editarPerfil, deletarUsuario, listarMoradores, editarUsuario } = require('./controladores/usuarios');
 const { login } = require('./controladores/login');
 const rotas = express();
 
@@ -70,6 +70,7 @@ rotas.post('/administrador/usuarios/cadastrar/:condominio_id', cadastrarUsuarios
 
 
 rotas.patch('/administrador/perfil/editar/:tipo/:id', editarPerfil);
+rotas.patch('/administrador/usuario/editar/:tipo/:id', editarUsuario);
 rotas.patch('/administrador/condominio/editar/:id', editarCondominio);
 rotas.patch('/administrador/ocorrencias/:id', editarOcorrencia);
 

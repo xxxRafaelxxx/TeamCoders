@@ -1,6 +1,31 @@
 'use strict';
 
 document.addEventListener("DOMContentLoaded", function () {
+    // Seleciona o botão de logout
+    const logoutButton = document.getElementById('logout_btn');
+
+    // Adiciona um ouvinte de evento de clique ao botão
+    logoutButton.addEventListener('click', function () {
+        // Limpa o token do localStorage (ou qualquer outra lógica de logout que você tenha)
+        localStorage.removeItem('token');
+
+        // Redireciona para a página de login
+        window.location.href = '../login/index.html'; // Substitua com o caminho correto
+    });
+});
+document.addEventListener("DOMContentLoaded", function () {
+    // Seleciona o elemento onde você deseja mostrar o nome do usuário
+    const nomeUsuarioElement = document.querySelector('#user-infos .item-description:first-child');
+
+    // Obtém o nome do usuário do token (supondo que o token e a decodificação já foram feitos)
+    const token = localStorage.getItem('token');
+    const decodedToken = JSON.parse(atob(token.split('.')[1]));
+    const nomeUsuario = decodedToken.nome;
+
+    // Atualiza o conteúdo do elemento com o nome do usuário
+    nomeUsuarioElement.textContent = nomeUsuario;
+});
+document.addEventListener("DOMContentLoaded", function () {
     const openModal = (modalId) => {
         const modal = document.getElementById(modalId);
         modal.classList.add('active');
@@ -36,15 +61,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error('Token ou condominio_id não encontrado');
                 return;
             }
-            console.log("Dados enviados:", {
+
+            const dadosEnvio = {
                 nome,
                 email,
-                senha,
-                celular,
-                casa,
-                tipoUsuario,
-                condominioId,
-            });
+                senha_hash: senha,
+                telefone: celular,
+                status: tipoUsuario,
+                condominio_id: condominioId,
+                token
+            };
+
+            // Adiciona o campo casa apenas para tipos de usuário morador e sindico
+            if (tipoUsuario.toLowerCase().trim() === 'morador' || tipoUsuario.toLowerCase().trim() === 'sindico') {
+                dadosEnvio.casa = casa;
+            }
+
+            console.log("Dados enviados:", dadosEnvio);
+
             try {
                 const response = await fetch(`http://localhost:3000/administrador/usuarios/cadastrar/${condominioId}`, {
                     method: 'POST',
@@ -52,15 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     },
-                    body: JSON.stringify({
-                        nome,
-                        email,
-                        senha_hash: senha,
-                        telefone: celular,
-                        casa,
-                        status: tipoUsuario,
-                        condominio_id: condominioId,
-                    })
+                    body: JSON.stringify(dadosEnvio)
                 });
 
                 if (!response.ok) {
@@ -212,23 +238,24 @@ document.addEventListener("DOMContentLoaded", function () {
             const nome = document.querySelector('#modal-editar input[placeholder="Nome do Usuário"]').value;
             const email = document.querySelector('#modal-editar input[placeholder="E-mail do Usuário"]').value;
             const senha = document.querySelector('#modal-editar input[placeholder="Senha"]').value;
-            const celular = document.querySelector('#modal-editar input[placeholder="Celular do Usuário"]').value;
+            const telefone = document.querySelector('#modal-editar input[placeholder="Celular do Usuário"]').value;
             const casa = document.querySelector('#modal-editar input[placeholder="Quadra e Apartamento"]').value;
             const tipoUsuario = document.getElementById('userTypeEditar').value;
             const userId = document.getElementById('btnSalvarEditar').getAttribute('data-user-id');
 
             try {
-                const response = await fetch(`http://localhost:3000/administrador/perfil/editar/${tipoUsuario}/${userId}`, {
+                const response = await fetch(`http://localhost:3000/administrador/usuario/editar/${tipoUsuario}/${userId}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify({
+                        telefone,
+                        senha_hash: senha,
                         nome,
                         email,
-                        senha,
-                        celular,
+                        status: tipoUsuario,
                         casa
                     })
                 });
@@ -256,3 +283,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     getUsuarios();
 });
+

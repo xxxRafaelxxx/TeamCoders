@@ -7,8 +7,8 @@ body {
 }
 
 .main-login {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background-color: #dfe4ea;
     display: flex;
     justify-content: center;
@@ -25,6 +25,9 @@ body {
     padding-left: 20px;
     padding-top: 50px;
 }
+.left-login-image-logo {
+    width: 200px;
+}
 
 .left-login h1 {
     font-size: 2vw;
@@ -32,7 +35,7 @@ body {
 }
 
 .left-login-image {
-    width: 35vw;
+    width: 400px;
 }
 
 .right-login {
@@ -61,6 +64,9 @@ body {
     margin: 0;
 }
 
+.card-login p {
+    text-align: center;
+}
 .textfield {
     width: 100%;
     display: flex;
@@ -70,7 +76,7 @@ body {
     margin: 10px 0px;
 }
 
-.textfield input {
+.textfield  input {
     width: 100%;
     border: none;
     border-radius: 10px;
@@ -78,7 +84,7 @@ body {
     background: #ffffff;
     color: #000000;
     font-size: 12pt;
-    box-shadow: 0px 10px 30px #e3e642;
+    box-shadow: 0px 10px 10px #e3e642;
     outline: none;
     box-sizing: border-box;
 }
@@ -102,13 +108,36 @@ body {
     cursor: pointer;
 }
 
-@media only screen and (max-width: 950px) {
+.botao-login a {
+    text-decoration: none; /* Remove o sublinhado */
+    color: inherit; 
+}
+
+.typeuser {
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.typeuser label {
+    margin-bottom: 15px;
+}
+
+.typeuser select {
+    padding: 15px;
+    width: 400px;
+    border: none;
+    border-radius: 20px;
+    font-size: 15px;
+}
+@media only screen and (max-width: 950px){
     .card-login {
         width: 85%;
     }
 }
 
 @media only screen and (max-width: 600px) {
+    
     .main-login {
         flex-direction: column;
     }
@@ -127,6 +156,9 @@ body {
         height: auto;
     }
 
+    .typeuser select {
+        width: 350px;
+    }
     .left-login-image {
         width: 50vw;
     }
