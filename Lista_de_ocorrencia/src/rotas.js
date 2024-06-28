@@ -1,4 +1,5 @@
 const express = require('express')
+const multer = require('multer');
 const { cadastrarCondominio, listarCondominio, editarCondominio, obterCondominio, deletarCondominio } = require('./controladores/condominio');
 const { registrarOcorrencia, listarOcorrencias, obterOcorrencia, editarOcorrencia, deletarOcorrencia } = require('./controladores/ocorrencias');
 const { listarAdministrador, obterAdministrador, editarAdministrador, deletarAdministrador, cadastrarAdministrador } = require('./controladores/administradores');

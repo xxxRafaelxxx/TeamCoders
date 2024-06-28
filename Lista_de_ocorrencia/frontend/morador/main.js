@@ -29,24 +29,31 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
 
         const form = event.target;
-        const formData = new FormData(form);
 
         const token = localStorage.getItem('token');
         const decodedToken = JSON.parse(atob(token.split('.')[1]));
         const condominioId = decodedToken.condominio_id;
+        const moradorId = decodedToken.id; // Ou qualquer lógica para obter o ID do morador
 
-        // Adicionar o condominio_id aos dados do formData
-        formData.append('condominio_id', condominioId);
-
-
+        const dadosEnvio = {
+            condominio_id: condominioId,
+            morador_id: moradorId,
+            assunto: form.querySelector('[name="assunto"]').value,
+            tipo_ocorrencia: form.querySelector('[name="tipo"]').value,
+            nota: form.querySelector('[name="detalhes"]').value,
+            data_ocorrido: form.querySelector('[name="data"]').value,
+            foto: null, // Se você quiser enviar a foto como um link ou base64, precisa tratar isso de outra forma
+            status: 'pendente' // Ou qualquer status inicial
+        };
+        console.log(dadosEnvio);
         try {
             const response = await fetch(`http://localhost:3000/morador/ocorrencia/registrar/${condominioId}`, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
-                body: formData
-
+                body: JSON.stringify(dadosEnvio)
             });
 
             if (!response.ok) {
@@ -57,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             form.reset(); // Limpa o formulário após o envio bem-sucedido
         } catch (error) {
             console.error('Erro:', error);
-            alert('erro ao registrar ocorrência');
+            alert('Erro ao registrar ocorrência');
         }
     });
 });

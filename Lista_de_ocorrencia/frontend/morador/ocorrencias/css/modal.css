@@ -1,41 +1,91 @@
-.modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
+.modal-ver {
+    display: none;
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgba(0, 0, 0, 0.5); 
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal-content {
+.modal-ver h2 {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.modal-content-ver {
     background-color: #fefefe;
-    margin: 10% auto; 
+    margin: 30px auto;
+    /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 50%; 
-    position: relative;
+    width: 70%;
+    /* Could be more or less, depending on screen size */
+    border-radius: 10px;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
-.modal-content h2 {
-    margin-bottom: 20px;
-}
-.modal-content .form #formEditar{
+.modal-ver .modal-textfield {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    height: auto;
+    /* Auto height to accommodate varying text lengths */
+    margin-left: 40px;
+    margin-right: 40px;
+    /* Adjusted to prevent overflow */
+    background-color: #eeeeee;
+    border-radius: 20px;
+    margin-bottom: 20px;
 }
 
+.modal-textfield label {
+    padding: 10px;
+    background-color: #EEE82C;
+}
+
+.modal-textfield p,
+.modal-textfield ul {
+    margin: 0;
+    /* Remove default margin */
+    word-wrap: break-word;
+    /* Ensure text wraps within the container */
+    white-space: pre-wrap;
+    /* Preserve whitespace and ensure text wraps */
+    padding: 20px;
+}
+
+.modal-status {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content-status {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
 
 .close {
     color: #aaa;
-    position: absolute;
-    top: 10px;
-    right: 15px;
+    float: right;
     font-size: 28px;
     font-weight: bold;
 }
@@ -45,4 +95,22 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.modal-status-textfield {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.modal-status-textfield label {
+    width: 80px;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #EEE82C;
+}
+
+.modal-status-textfield p {
+    margin: 0;
+    padding: 20px;
 }

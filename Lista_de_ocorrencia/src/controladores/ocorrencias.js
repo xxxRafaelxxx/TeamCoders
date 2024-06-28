@@ -35,15 +35,15 @@ const listarOcorrencias = async (req, res) => {
 
 };
 
-
 const registrarOcorrencia = async (req, res) => {
-    // sind, mor ou por
     const { condominio_id } = req.params;
+    console.log(req.body);
     if (!condominio_id) {
         return res.status(400).json("O campo condominio_id é obrigatorio");
     }
+
     try {
-        const { morador_id, sindico_id, porteiro_id, assunto, tipo_ocorrencia, nota, data_ocorrido, foto, status } = req.body;
+        const { morador_id, sindico_id, porteiro_id, assunto, tipo_ocorrencia, nota, data_ocorrido, status } = req.body;
 
         if (!morador_id && !sindico_id && !porteiro_id) {
             return res.status(400).json({ erro: 'É necessário especificar quem registrou a ocorrência (morador_id, sindico_id ou porteiro_id).' });
@@ -52,7 +52,7 @@ const registrarOcorrencia = async (req, res) => {
         if ((morador_id && sindico_id) || (morador_id && porteiro_id) || (sindico_id && porteiro_id)) {
             return res.status(400).json({ erro: 'A ocorrência só pode ser registrada por um morador, um síndico ou um porteiro, não mais de um ao mesmo tempo.' });
         }
-        // Agora podemos inserir a ocorrência
+
         await knex('ocorrencias').insert({
             morador_id,
             sindico_id,
@@ -62,7 +62,6 @@ const registrarOcorrencia = async (req, res) => {
             tipo_ocorrencia,
             nota,
             data_ocorrido,
-            foto,
             status
         });
 
@@ -71,7 +70,9 @@ const registrarOcorrencia = async (req, res) => {
         console.error(error);
         return res.status(500).json({ erro: 'Erro ao registrar a ocorrência.' });
     }
-}
+};
+
+
 
 const obterOcorrencia = async (req, res) => {
     try {

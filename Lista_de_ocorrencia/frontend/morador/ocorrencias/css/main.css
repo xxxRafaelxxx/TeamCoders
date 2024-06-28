@@ -1,17 +1,17 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-:root{
+:root {
     --primary-color: #EEE82C;
     --secundary-color: #FFF1CC;
     --shadow-color: #CCC;
     --text-color: #fff;
 }
 
-body{
+body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -20,7 +20,8 @@ body{
     background-color: #D9D9D9;
 }
 
-body, html {
+body,
+html {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -32,7 +33,7 @@ body, html {
     gap: 20px;
 }
 
-header{
+header {
     background-color: var(--primary-color);
     height: 70px;
     padding-left: 20px;
@@ -50,12 +51,12 @@ header{
 }
 
 
-.header-title{
+.header-title {
     color: black;
     font-size: 2rem;
 }
 
-main{
+main {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -68,8 +69,8 @@ main{
     background-color: #fff;
 }
 
-footer{
-    width:100;
+footer {
+    width: 100;
     text-align: center;
     font-weight: 200;
     font-style: italic;
@@ -122,7 +123,7 @@ footer{
     list-style: none;
 }
 
-.side-item{
+.side-item {
     border-radius: 8px;
     padding: 14px;
     cursor: pointer;
@@ -187,21 +188,52 @@ footer{
     cursor: pointer;
 }
 
-#open_btn a{
+#open_btn a {
     color: inherit;
     text-decoration: none;
 }
 
+/* Estilos para os status */
+.status-inicial {
+    display: flex;
+    flex-direction: column;
+}
 
-@media (max-width:480px){
-    header{
-        width:100%;
+.status {
+    margin-right: 10px;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    opacity: 0.4;
+    /* Opacidade inicial para Visto e Resolvido */
+}
+
+.status.Esperando {
+    opacity: 1;
+    /* Opacidade alta para Esperando */
+    background-color: rgb(238, 232, 144);
+}
+
+.status.Visto {
+    background-color: rgb(153, 144, 238);
+    /* Fundo verde para Visto */
+}
+
+.status.Resolvido {
+    background-color: lightgreen;
+    /* Fundo verde para Resolvido */
+}
+
+@media (max-width:480px) {
+    header {
+        width: 100%;
     }
-    .header-title{
+
+    .header-title {
         font-size: 1.5rem;
     }
 
-    main{
+    main {
         padding: 0;
         margin: 20px 0 0 0;
         width: auto;
@@ -211,6 +243,7 @@ footer{
     .container-ocorrencia {
         padding-right: 15px;
     }
+
     .imagem {
         display: none;
     }

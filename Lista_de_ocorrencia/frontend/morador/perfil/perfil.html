@@ -110,9 +110,11 @@
 
                     <li>
                         <label for="senha">Senha:</label>
-                        <input type="password" id="senha" name="senha" placeholder="Digite a nova senha" disabled>
-                        <input type="checkbox" id="mostrar-senha" onchange="toggleMostrarSenha()"> Mostrar senha
-
+                        <div class="senha-container">
+                            <input type="password" id="senha" name="senha" placeholder="Digite a nova senha" disabled>
+                            <input type="checkbox" id="mostrar-senha" onchange="toggleMostrarSenha()">
+                            <label for="mostrar-senha">Mostrar senha</label>
+                        </div>
                     </li>
                 </ul>
             </div>
