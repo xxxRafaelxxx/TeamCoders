@@ -35,6 +35,39 @@ const listarOcorrencias = async (req, res) => {
 
 };
 
+const listarOcorrenciasDoUsuario = async (req, res) => {
+    try {
+        const { id, status, condominio_id } = req.params;
+
+        if (!condominio_id || !id || !status) {
+            return res.status(400).json("Os campos condominio_id, id e status são obrigatórios");
+        }
+
+        const ocorrencias = await knex('ocorrencias')
+            .leftJoin('moradores', 'ocorrencias.morador_id', 'moradores.id')
+            .leftJoin('sindicos', 'ocorrencias.sindico_id', 'sindicos.id')
+            .leftJoin('porteiros', 'ocorrencias.porteiro_id', 'porteiros.id')
+            .select(
+                'ocorrencias.*',
+                'moradores.condominio_id as morador_condominio_id',
+                'sindicos.condominio_id as sindico_condominio_id',
+                'porteiros.condominio_id as porteiro_condominio_id'
+            )
+            .where(function () {
+                this.where('moradores.id', id).andWhere('moradores.condominio_id', condominio_id).andWhere('moradores.status', status)
+                    .orWhere('sindicos.id', id).andWhere('sindicos.condominio_id', condominio_id).andWhere('sindicos.status', status)
+                    .orWhere('porteiros.id', id).andWhere('porteiros.condominio_id', condominio_id).andWhere('porteiros.status', status);
+            });
+
+        return res.status(200).json(ocorrencias);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ erro: 'Erro ao listar as ocorrências.' });
+    }
+};
+
+
+
 const registrarOcorrencia = async (req, res) => {
     const { condominio_id } = req.params;
     console.log(req.body);
@@ -139,6 +172,7 @@ const deletarOcorrencia = async (req, res) => {
 
 module.exports = {
     registrarOcorrencia,
+    listarOcorrenciasDoUsuario,
     listarOcorrencias,
     obterOcorrencia,
     editarOcorrencia,

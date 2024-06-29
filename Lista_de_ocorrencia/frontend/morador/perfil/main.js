@@ -1,6 +1,7 @@
 'use strict';
 
 let editingMode = false; // Variável para controlar o modo de edição
+
 document.addEventListener("DOMContentLoaded", function () {
     // Seleciona o botão de logout
     const logoutButton = document.getElementById('logout_btn');
@@ -26,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Atualiza o conteúdo do elemento com o nome do usuário
     nomeUsuarioElement.textContent = nomeUsuario;
 });
+
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
 

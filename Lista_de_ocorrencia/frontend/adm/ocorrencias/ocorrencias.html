@@ -29,8 +29,8 @@
         <img src="../img/CodoLog.png" alt="" class="header-logo">
         <h1 class="header-title">- ADM</h1>
     </header>
-    <div class="container"> <!--Todo o conteúdo abaixo do header (Siderbar/Main)-->
-        <nav id="sidebar"> <!--Contéudo da sidebar-->
+    <div class="container">
+        <nav id="sidebar">
             <div id="sidebar_content">
                 <div id="user">
                     <img src="user-fill.svg" id="user-avatar" alt="Avatar">
@@ -40,7 +40,7 @@
                     </p>
                 </div>
 
-                <ul id="side_items"> <!--Condomínio / Usuário / Ocorrências-->
+                <ul id="side_items">
                     <li class="side-item">
                         <a href="../condominio/condominio.html">
                             <i class="fa-solid fa-house"></i>
@@ -75,7 +75,7 @@
         </nav>
         <main>
             <h1>Todas as Ocorrências</h1>
-            <table class="records"> <!--Tabela de gravações do cadastro do cliente-->
+            <table class="records">
                 <thead>
                     <tr>
                         <th>Assunto</th>
@@ -107,6 +107,41 @@
             <h2>Atualizar Status da Ocorrência</h2>
             <button type="button" onclick="updateStatus('visto')">Marcar como Visto</button>
             <button type="button" onclick="updateStatus('resolvido')">Marcar como Resolvido</button>
+        </div>
+    </div>
+
+    <div id="verModal" class="modal-ver">
+        <div class="modal-content-ver">
+            <span class="close" onclick="closeModalVer()">&times;</span>
+            <h2>Ocorrência</h2>
+            <div class="modal-textfield">
+                <label>Assunto:</label>
+                <p id="assunto">quebraram meu carro com pedrada</p>
+            </div>
+            <div class="modal-textfield">
+                <label>Usuário:</label>
+                <p id="usuario">21</p>
+            </div>
+            <div class="modal-textfield">
+                <label>Tipo de ocorrência:</label>
+                <p id="tipo">Manutenção</p>
+            </div>
+            <div class="modal-textfield">
+                <label>Detalhes:</label>
+                <p id="detalhes"></p>
+            </div>
+            <div class="modal-textfield">
+                <label>Status:</label>
+                <p id="status">
+                </p>
+            </div>
+            <div class="modal-textfield">
+                <label>Data:</label>
+                <p id="data">10/20/2024</p>
+            </div>
+            <div class="modal-textfield">
+                <label>Anexos:</label>
+            </div>
         </div>
     </div>
 

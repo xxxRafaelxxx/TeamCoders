@@ -1,16 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" integrity="sha512-OQDNdI5rpnZ0BRhhJc+btbbtnxaj+LdQFeh0V9/igiEPDiWE2fG+ZsXl0JEH+bjXKPJ3zcXqNyP4/F/NegVdZg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css"
+        integrity="sha512-OQDNdI5rpnZ0BRhhJc+btbbtnxaj+LdQFeh0V9/igiEPDiWE2fG+ZsXl0JEH+bjXKPJ3zcXqNyP4/F/NegVdZg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/button.css">
     <link rel="stylesheet" href="css/records.css">
@@ -18,6 +23,7 @@
     <script src="main.js" defer></script>
     <title>CRUD</title>
 </head>
+
 <body>
     <header>
         <img src="../img/CodoLog.png" alt="" class="header-logo">
@@ -25,126 +31,90 @@
         </h1>
     </header>
     <div class="container"> <!--Todo o conteúdo abaixo do header (Siderbar/Main)-->
-    <nav id="sidebar"> <!--Contéudo da sidebar-->
-        <div id="sidebar_content">
-        <div id="user">
-            <img src="user-fill.svg" id="user-avatar" alt="Avatar">
-            <p id="user-infos">
-                <span class="item-description">
-                    Nome Fulano
-                </span>
-                <span class="item-description">
-                    Síndico
-                </span>
-            </p>
-        </div>
-        
-        <ul id="side_items"> <!--Condomínio / Usuário / Ocorrências-->
-            <li class="side-item active">
-                <a href="condominio.html">
-                    <i class="fa-solid fa-house"></i>
-                    <span class="item-description">
-                        Condomínio
-                    </span>
-                </a>
-            </li>
-
-            <li class="side-item">
-                <a href="../index.html">
-                    <i class="fa-solid fa-user-group"></i>
-                    <span class="item-description">
-                        Registrar Ocorrência
-                    </span>
-                </a>
-            </li>
-
-            <li class="side-item">
-            <a href="../ocorrencias/ocorrencias.html">
-                    <i class="fa-solid fa-book"></i>
-                    <span class="item-description">
-                        Ocorrências
-                    </span>
-                </a>
-            </li>
-        </ul>
-
-        <button id="open_btn">
-            <a href="../perfil/perfil.html">
-            <i id="open_btn_icon" class="fa-solid fa-chevron-right"></i>
-        </a>
-        </button>
-    </div>
-    
-        <div id="logout">
-            <button id="logout_btn">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <span class="item-description">
-                    Sair
-                </span>
-            </button>
-        </div>
-    </nav>
-    <main>
-        <h1>Informações do Condomínio</h1>
-
-        <div id="informacoes">
-            <h2>Cond. Lagoa Verde</h2>
-            <p><strong>Total de moradores: </strong><span id="totalMoradores">100</span></p>
-            <p><strong>Localização: </strong><span id="localizacao">Rua das Flores, 123</span></p>
-            <p><strong>Imagens:</strong> <span id="imagens">Clique para ver as imagens</span></p>
-            <p><strong>Contato síndicos: </strong><span id="contatoSindicos">(XX) XXXX-XXXX</span></p>
-            <p><strong>E-mail da administração:</strong> <span id="emailAdministracao">admin@condominiolagoaverde.com</span></p>
-            <p><strong>Número da administração: </strong><span id="numeroAdministracao">(XX) XXXX-XXXX</span></p>
-            <p><strong>Número da portaria:</strong> <span id="numeroPortaria">(XX) XXXX-XXXX</span></p>
-        </div>
-        <button class="button green" id="editarInformacoes" type="submit">Editar Informações</button>
-
-        <!-- Modal -->
-        <div id="modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Editar Informações</h2>
-
-                <div class="form">
-                <form id="formEditar">
-                    <div class="moradores">
-                        <label for="totalMoradoresInput"><strong>Total de moradores:</strong></label>
-                        <input type="text" id="totalMoradoresInput">
-                    </div>
-
-                    <div class="localizacao">
-                        <label for="localizacaoInput"><strong>Localização:</strong></label>
-                        <input type="text" id="localizacaoInput">
-                    </div>
-
-                    <div class="sindico">
-                        <label for="contatoSindicosInput"><strong>Contato síndicos:</strong></label>
-                        <input type="text" id="contatoSindicosInput">
-                    </div>
-                    <div class="email">
-                        <label for="emailAdministracaoInput"><strong>E-mail da administração:</strong></label>
-                        <input type="email" id="emailAdministracaoInput">
-                    </div>
-                    <div class="numero-adm">
-                        <label for="numeroAdministracaoInput"><strong>Número da administração:</strong></label>
-                        <input type="tel" id="numeroAdministracaoInput">
-                    </div>
-                    
-                    <div class="numero-porta">
-                        <label for="numeroPortariaInput"><strong>Número da portaria:</strong></label>
-                        <input type="tel" id="numeroPortariaInput">
-                    </div>
-
-                    <div class="botao-editar">
-                    <button class="button green" id="editar-btn" type="submit">Salvar</button>
-                    </div>
-                </form>
+        <nav id="sidebar"> <!--Contéudo da sidebar-->
+            <div id="sidebar_content">
+                <div id="user">
+                    <img src="user-fill.svg" id="user-avatar" alt="Avatar">
+                    <p id="user-infos">
+                        <span class="item-description">
+                            Nome Fulano
+                        </span>
+                        <span class="item-description">
+                            Síndico
+                        </span>
+                    </p>
                 </div>
+
+                <ul id="side_items"> <!--Condomínio / Usuário / Ocorrências-->
+                    <li class="side-item active">
+                        <a href="condominio.html">
+                            <i class="fa-solid fa-house"></i>
+                            <span class="item-description">
+                                Condomínio
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="side-item">
+                        <a href="../index.html">
+                            <i class="fa-solid fa-user-group"></i>
+                            <span class="item-description">
+                                Registrar Ocorrência
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="side-item">
+                        <a href="../ocorrencias/ocorrencias.html">
+                            <i class="fa-solid fa-book"></i>
+                            <span class="item-description">
+                                Ocorrências
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+
+                <button id="open_btn">
+                    <a href="../perfil/perfil.html">
+                        <i id="open_btn_icon" class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </button>
             </div>
-        </div>
+
+            <div id="logout">
+                <button id="logout_btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span class="item-description">
+                        Sair
+                    </span>
+                </button>
+            </div>
+        </nav>
+        <main>
+            <h1>Informações do Condomínio</h1>
+
+            <div id="informacoes">
+                <div id="info">
+                    <div id="info-left">
+                        <h2 id="condominio-nome">Cond. Nome</h2>
+                        <p><strong>Total de moradores:</strong> <span id="total-moradores">N/A</span></p>
+                        <p><strong>Localização:</strong> <span id="localizacao">N/A</span></p>
+                    </div>
+                    <div id="info-right">
+                        <p><strong>Contato síndicos:</strong> <span id="contato-sindico">N/A</span></p>
+                        <p><strong>E-mail da administração:</strong> <span id="email-administracao">N/A</span></p>
+                        <p><strong>Número da administração:</strong> <span id="numero-administracao">N/A</span></p>
+                        <p><strong>Número da portaria:</strong> <span id="numero-portaria">N/A</span></p>
+                    </div>
+                </div>
+                </form>
+            </div>
+    </div>
+    </div>
     </main>
-</div>
+    </div>
 </body>
 </div>
 </body>
+
 </html>

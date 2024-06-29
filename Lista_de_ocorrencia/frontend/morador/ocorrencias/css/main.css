@@ -67,6 +67,8 @@ main {
     box-shadow: 2px 2px 10px var(--shadow-color);
     gap: 20px;
     background-color: #fff;
+    overflow-y: auto;
+    max-height: 80vh;
 }
 
 footer {

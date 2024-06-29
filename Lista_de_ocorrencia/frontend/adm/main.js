@@ -157,11 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         usuarios.porteiros.forEach(usuario => {
-            adicionarLinhaTabela(tabela, usuario, 'portaria');
-        });
-
-        usuarios.administradores.forEach(usuario => {
-            adicionarLinhaTabela(tabela, usuario, 'administrador');
+            adicionarLinhaTabela(tabela, usuario, 'porteiro');
         });
     };
 

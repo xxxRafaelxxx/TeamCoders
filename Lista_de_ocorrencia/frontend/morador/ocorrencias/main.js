@@ -18,12 +18,12 @@ async function fetchAndDisplayOccurrences() {
     try {
         const token = localStorage.getItem('token');
         const decodedToken = JSON.parse(atob(token.split('.')[1]));
+        const userId = decodedToken.id;
         const condominioId = decodedToken.condominio_id;
+        const userType = decodedToken.status
 
-        const response = await fetch(`http://localhost:3000/administrador/ocorrencias/${condominioId}`);
-        if (!response.ok) {
-            throw new Error('Erro ao buscar ocorrências');
-        }
+        const response = await fetch(`http://localhost:3000/morador/ocorrencias/${userId}/${userType}/${condominioId}`);
+
 
         const ocorrencias = await response.json();
         const tbody = document.querySelector('.records tbody');
@@ -64,10 +64,8 @@ async function verNotas(ocorrenciaId) {
         const decodedToken = JSON.parse(atob(token.split('.')[1]));
         const condominioId = decodedToken.condominio_id;
 
-        const response = await fetch(`http://localhost:3000/administrador/ocorrencia/${ocorrenciaId}/${condominioId}`);
-        if (!response.ok) {
-            throw new Error('Erro ao buscar notas da ocorrência');
-        }
+        const response = await fetch(`http://localhost:3000/morador/ocorrencia/${ocorrenciaId}/${condominioId}`);
+
 
 
         const ocorrencia = await response.json();
@@ -114,12 +112,12 @@ async function fetchAndDisplayOccurrences() {
     try {
         const token = localStorage.getItem('token');
         const decodedToken = JSON.parse(atob(token.split('.')[1]));
+        const userId = decodedToken.id;
         const condominioId = decodedToken.condominio_id;
+        const userType = decodedToken.status
 
-        const response = await fetch(`http://localhost:3000/administrador/ocorrencias/${condominioId}`);
-        if (!response.ok) {
-            throw new Error('Erro ao buscar ocorrências');
-        }
+        const response = await fetch(`http://localhost:3000/morador/ocorrencias/${userId}/${userType}/${condominioId}`);
+
 
         const ocorrencias = await response.json();
         const tbody = document.querySelector('.records tbody');

@@ -60,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error('Erro ao registrar a ocorrência');
             }
 
-            alert('Ocorrência registrada com sucesso');
             form.reset(); // Limpa o formulário após o envio bem-sucedido
         } catch (error) {
             console.error('Erro:', error);

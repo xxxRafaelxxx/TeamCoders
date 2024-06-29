@@ -1,7 +1,7 @@
 const express = require('express')
 const multer = require('multer');
 const { cadastrarCondominio, listarCondominio, editarCondominio, obterCondominio, deletarCondominio } = require('./controladores/condominio');
-const { registrarOcorrencia, listarOcorrencias, obterOcorrencia, editarOcorrencia, deletarOcorrencia } = require('./controladores/ocorrencias');
+const { registrarOcorrencia, listarOcorrencias, listarOcorrenciasDoUsuario, obterOcorrencia, editarOcorrencia, deletarOcorrencia } = require('./controladores/ocorrencias');
 const { listarAdministrador, obterAdministrador, editarAdministrador, deletarAdministrador, cadastrarAdministrador } = require('./controladores/administradores');
 const { listarUsuarios, cadastrarUsuarios, obterPerfil, listarPorteiros, listarSindicos, editarPerfil, deletarUsuario, listarMoradores, editarUsuario } = require('./controladores/usuarios');
 const { login } = require('./controladores/login');
@@ -16,6 +16,8 @@ rotas.post('/usuario/login', login);
 
 rotas.get('/morador/perfil/:id', obterPerfil);
 rotas.get('/morador/condominio/:id', obterCondominio);
+rotas.get('/morador/ocorrencias/:id/:status/:condominio_id', listarOcorrenciasDoUsuario);
+rotas.get('/morador/ocorrencia/:id/:condominio_id', obterOcorrencia);
 
 rotas.post('/morador/ocorrencia/registrar/:condominio_id', registrarOcorrencia);
 

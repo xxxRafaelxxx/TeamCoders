@@ -1,24 +1,32 @@
 /* Modal container */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
 }
 
 /* Modal content */
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 15% auto;
+    /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 80%;
+    /* Could be more or less, depending on screen size */
     max-width: 500px;
     border-radius: 10px;
 }
@@ -52,4 +60,68 @@
 
 .modal button:hover {
     background-color: #cecece;
+}
+
+.modal-ver {
+    display: none;
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-ver h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.modal-content-ver {
+    background-color: #fefefe;
+    margin: 30px auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%;
+    /* Could be more or less, depending on screen size */
+    border-radius: 10px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-ver .modal-textfield {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    /* Auto height to accommodate varying text lengths */
+    margin-left: 40px;
+    margin-right: 40px;
+    /* Adjusted to prevent overflow */
+    background-color: #eeeeee;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.modal-textfield label {
+    padding: 10px;
+    background-color: #EEE82C;
+}
+
+.modal-textfield p,
+.modal-textfield ul {
+    margin: 0;
+    /* Remove default margin */
+    word-wrap: break-word;
+    /* Ensure text wraps within the container */
+    white-space: pre-wrap;
+    /* Preserve whitespace and ensure text wraps */
+    padding: 20px;
 }

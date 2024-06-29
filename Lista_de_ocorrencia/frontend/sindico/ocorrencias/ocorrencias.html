@@ -1,16 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" integrity="sha512-OQDNdI5rpnZ0BRhhJc+btbbtnxaj+LdQFeh0V9/igiEPDiWE2fG+ZsXl0JEH+bjXKPJ3zcXqNyP4/F/NegVdZg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPK5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css"
+        integrity="sha512-OQDNdI5rpnZ0BRhhJc+btbbtnxaj+LdQFeh0V9/igiEPDiWE2fG+ZsXl0JEH+bjXKPJ3zcXqNyP4/F/NegVdZg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/button.css">
     <link rel="stylesheet" href="css/records.css">
@@ -20,120 +25,128 @@
 </head>
 
 <body>
-
     <header>
         <img src="../img/CodoLog.png" alt="" class="header-logo">
         <h1 class="header-title"> - SÍNDICO
         </h1>
     </header>
-    <div class="container"> <!--Todo o conteúdo abaixo do header (Siderbar/Main)-->
-    <nav id="sidebar"> <!--Contéudo da sidebar-->
-        <div id="sidebar_content">
-        <div id="user">
-            <img src="user-fill.svg" id="user-avatar" alt="Avatar">
-            <p id="user-infos">
-                <span class="item-description">
-                    Nome Fulano
-                </span>
-                <span class="item-description">
-                    Síndico
-                </span>
-            </p>
-        </div>
-        
-        <ul id="side_items"> <!--Condomínio / Usuário / Ocorrências-->
-            <li class="side-item">
-                <a href="../condominio/condominio.html">
-                    <i class="fa-solid fa-house"></i>
-                    <span class="item-description">
-                        Condomínio
-                    </span>
-                </a>
-            </li>
+    <div class="container">
+        <nav id="sidebar">
+            <div id="sidebar_content">
+                <div id="user">
+                    <img src="user-fill.svg" id="user-avatar" alt="Avatar">
+                    <p id="user-infos">
+                        <span class="item-description">
 
-            <li class="side-item">
-                <a href="../index.html">
-                    <i class="fa-solid fa-user-group"></i>
+                        </span>
+                        <span class="item-description">
+                            Síndico
+                        </span>
+                    </p>
+                </div>
+                <ul id="side_items">
+                    <li class="side-item">
+                        <a href="../condominio/condominio.html">
+                            <i class="fa-solid fa-house"></i>
+                            <span class="item-description">
+                                Condomínio
+                            </span>
+                        </a>
+                    </li>
+                    <li class="side-item">
+                        <a href="../index.html">
+                            <i class="fa-solid fa-user-group"></i>
+                            <span class="item-description">
+                                Registrar Ocorrência
+                            </span>
+                        </a>
+                    </li>
+                    <li class="side-item active">
+                        <a href="ocorrencias.html">
+                            <i class="fa-solid fa-book"></i>
+                            <span class="item-description">
+                                Ocorrências
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+                <button id="open_btn">
+                    <a href="../perfil/perfil.html">
+                        <i id="open_btn_icon" class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </button>
+            </div>
+            <div id="logout">
+                <button id="logout_btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
                     <span class="item-description">
-                        Registrar Ocorrência
+                        Sair
                     </span>
-                </a>
-            </li>
-
-            <li class="side-item active">
-            <a href="ocorrencias.html">
-                    <i class="fa-solid fa-book"></i>
-                    <span class="item-description">
-                        Ocorrências
-                    </span>
-                </a>
-            </li>
-        </ul>
-
-        <button id="open_btn">
-            <a href="../perfil/perfil.html">
-            <i id="open_btn_icon" class="fa-solid fa-chevron-right"></i>
-        </a>
-        </button>
+                </button>
+            </div>
+        </nav>
+        <main>
+            <h1>Suas Ocorrências</h1>
+            <table class="records">
+                <thead>
+                    <tr>
+                        <th>Assunto</th>
+                        <th>Tipo de Ocorrência</th>
+                        <th>Data</th>
+                        <th>Usuário</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
     </div>
-    
-        <div id="logout">
-            <button id="logout_btn">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <span class="item-description">
-                    Sair
-                </span>
-            </button>
+    <div id="verModal" class="modal-ver">
+        <div class="modal-content-ver">
+            <span class="close" onclick="closeModalver()">&times;</span>
+            <h2>Ocorrência</h2>
+            <div class="modal-textfield">
+                <label>Assunto:</label>
+                <p id="modalAssunto">quebraram meu carro com pedrada</p>
+            </div>
+            <div class="modal-textfield">
+                <label>Usuário:</label>
+                <p id="modalUsuario">21</p>
+            </div>
+            <div class="modal-textfield">
+                <label>Tipo de ocorrência:</label>
+                <p id="modalTipo">Manutenção</p>
+            </div>
+            <div class="modal-textfield">
+                <label>Detalhes:</label>
+                <p id="modalDetalhes">
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                </p>
+            </div>
+            <div class="modal-textfield">
+                <label>Data:</label>
+                <p id="modalData">10/20/2024</p>
+            </div>
+            <div class="modal-textfield">
+                <label>Anexos:</label>
+                <ul id="modalAnexos"><img src="../img/CodoLog.png" alt=""></ul>
+            </div>
         </div>
-    </nav>
-    <main>
-        <h1>Suas Ocorrências</h1>
-        <table class="records"> <!--Tabela de gravações do cadastro do cliente-->
-            <thead>
-                <tr>
-                    <th>Assunto</th>
-                    <th>Tipo de Ocorrência</th>
-                    <th>Data</th>
-                    <th>Usuário</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Lixo</td>
-                    <td>Limpeza</td>
-                    <td>10/10/2024</td>
-                    <td>Maria</td>
-                    <td>
-                        <button type="button" class="button blue">ver</button>
-                        <button type="button" class="button red">ver status</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Lixo</td>
-                    <td>Limpeza</td>
-                    <td>10/10/2024</td>
-                    <td>Maria</td>
-                    <td>
-                        <button type="button" class="button blue">ver</button>
-                        <button type="button" class="button red">ver status</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Lixo</td>
-                    <td>Limpeza</td>
-                    <td>10/10/2024</td>
-                    <td>Maria</td>
-                    <td>
-                        <button type="button" class="button blue">ver</button>
-                        <button type="button" class="button red">ver status</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </main>
-</div>
+    </div>
+    <div id="statusModal" class="modal-status">
+        <div class="modal-content-status">
+            <span class="close" onclick="closeModalStatus()">&times;</span>
+            <h2>Status da Ocorrência</h2>
+            <div class="modal-status-textfield">
+                <label>Status:</label>
+                <p id="status"></p>
+            </div>
+        </div>
+    </div>
+
 </body>
-</div>
-</body>
+
 </html>

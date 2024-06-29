@@ -204,33 +204,73 @@ footer {
     margin-top: 0;
 }
 
-.informacoes ul {
+.informacoes .info-ul ul,
+.senha-container ul {
     list-style: none;
     padding: 0;
 }
 
-.informacoes li {
+.informacoes .info-ul li {
     margin-bottom: 10px;
 }
 
-.informacoes label {
+.informacoes .info-ul label {
     display: block;
     margin-bottom: 5px;
 }
 
-.informacoes input {
+.informacoes .info-ul input {
     width: 100%;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 3px;
 }
 
-.informacoes input[disabled] {
+.informacoes .info-ul input[disabled] {
     background-color: #ddd;
 }
 
 .informacoes .titulo {
     text-align: center;
+}
+
+.senha-container #senha {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.senha-container #senha[disabled] {
+    background-color: #ddd;
+}
+
+.senha-container .senha-mostrar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.senha-container .senha-mostrar p {
+    font-size: 14px;
+}
+
+@media (max-width:480px) {
+    header {
+        position: fixed;
+        width: 100%;
+    }
+
+    .header-title {
+        font-size: 1.5rem;
+    }
+
+    main {
+        padding: 0;
+        margin: 20px 0 0 0;
+        width: 100%;
+        box-shadow: none;
+    }
 }
 
 @media (max-width:480px) {
